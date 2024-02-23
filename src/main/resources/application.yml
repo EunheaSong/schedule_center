@@ -10,4 +10,3 @@ spring:
       # entity table name custom
       naming:
         physical-strategy : com.seed_planner.schedule_center.common.CustomNamingStrategy
-##???
