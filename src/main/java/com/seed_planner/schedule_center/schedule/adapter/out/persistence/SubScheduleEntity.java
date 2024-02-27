@@ -1,6 +1,6 @@
 package com.seed_planner.schedule_center.schedule.adapter.out.persistence;
 
-import com.seed_planner.schedule_center.common.BaseEntity;
+import com.seed_planner.schedule_center.common.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

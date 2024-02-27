@@ -1,4 +1,4 @@
-package com.seed_planner.schedule_center.common;
+package com.seed_planner.schedule_center.common.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -17,6 +17,8 @@ public class JwtProviderImpl implements JwtProvider {
     private final int ACCESS_EXPIRATION;
     private final String JWT_SECRET_KEY;
 
+    private static final String BEARER = "Bearer";
+
     public JwtProviderImpl(
         @Value("${jwt.secret-key}") String secretKey,
         @Value("${jwt.access-expired}") int accessExpiration
@@ -26,7 +28,7 @@ public class JwtProviderImpl implements JwtProvider {
     }
 
     public String issueToken(Map<String, Object> data) {
-        return Jwts.builder()
+        return BEARER + " " + Jwts.builder()
             .addClaims(data)
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + ACCESS_EXPIRATION))
@@ -35,7 +37,10 @@ public class JwtProviderImpl implements JwtProvider {
     }
 
     public void isValidToken(String token) {
-        getClaims(token).getExpiration();
+        if (token.isEmpty() || token.isBlank()) throw new IllegalArgumentException("Token is empty or blank.");
+        String[] tokens = token.split(" ");
+        if (!tokens[0].equals(BEARER)) throw new IllegalArgumentException("This is malformed token.");
+        getClaims(tokens[1]).getExpiration();
     }
 
     public Claims getClaims(String token) {

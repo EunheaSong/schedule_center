@@ -1,4 +1,4 @@
-package com.seed_planner.schedule_center.common;
+package com.seed_planner.schedule_center.common.model;
 
 import lombok.Getter;
 

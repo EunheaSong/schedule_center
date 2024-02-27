@@ -1,7 +1,8 @@
 package com.seed_planner.schedule_center.common;
 
+import com.seed_planner.schedule_center.common.jwt.JwtProvider;
+import com.seed_planner.schedule_center.common.jwt.JwtProviderImpl;
 import io.jsonwebtoken.Jwts;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
