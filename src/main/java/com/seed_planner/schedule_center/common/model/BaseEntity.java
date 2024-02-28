@@ -8,12 +8,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+import static com.seed_planner.schedule_center.common.Utils.customUUID;
+
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public abstract class BaseEntity {
-    @Id
-    private String id;
+    @Id @Column(length = 15)
+    private String id = customUUID();
 
     @CreatedDate
     @Column(nullable = false)
