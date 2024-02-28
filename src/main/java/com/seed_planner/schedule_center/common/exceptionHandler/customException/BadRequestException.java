@@ -7,7 +7,7 @@ import lombok.Getter;
 public class BadRequestException extends IllegalArgumentException {
     private final CustomResponse errorMessage;
 
-    BadRequestException(CustomResponse errorMessage){
+    public BadRequestException(CustomResponse errorMessage){
         this.errorMessage = errorMessage;
     }
 }

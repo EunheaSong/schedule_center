@@ -8,5 +8,5 @@ public class NotFoundResourceException extends IllegalArgumentException {
 
     private final CustomResponse errorMessage;
 
-    NotFoundResourceException(CustomResponse errorMessage) { this.errorMessage = errorMessage; }
+    public NotFoundResourceException(CustomResponse errorMessage) { this.errorMessage = errorMessage; }
 }
