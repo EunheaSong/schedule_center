@@ -35,24 +35,44 @@ public class GlobalExceptionHandler {
 
     private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    /**
+     * 올바르지 않은 모든 Request 에 대해.
+     * @param e
+     * @return HTTP code : 400, error message
+     */
     @ExceptionHandler(value = BadRequestException.class)
     public ResponseEntity<?> badRequestException(BadRequestException e) {
         logger.error("BadRequestException: ", e);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getErrorMessage());
     }
 
+    /**
+     * Request data value 로 조회되는 결과가 없을 경우.
+     * @param e
+     * @return HTTP code : 404, error message
+     */
     @ExceptionHandler(value = NotFoundResourceException.class)
     public ResponseEntity<?> notFoundException(NotFoundResourceException e) {
         logger.error("NotFoundException: ", e);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getErrorMessage());
     }
 
+    /**
+     * 로그인을 시도한 사용자 정보를 찾을 수 없을 경우.
+     * @param e
+     * @return HTTP code : 401, error message
+     */
     @ExceptionHandler(value = NotFoundAuthException.class)
     public ResponseEntity<?> notFoundUserException(NotFoundAuthException e) {
         logger.error("NotFoundAuthException: ", e);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getErrorMessage());
     }
 
+    /**
+     * Request URL의 param 타입 체크.
+     * @param e
+     * @return HTTP code : 400, error message
+     */
     @ExceptionHandler(value = MissingPathVariableException.class)
     public ResponseEntity<?> missingPathVariableExceptionException(MissingPathVariableException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(ExceptionCode.E00002, e.getMessage());
@@ -60,6 +80,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
     }
 
+    /**
+     * 필수 data 체크.
+     * @param e
+     * @return HTTP code : 400, error message
+     */
     @ExceptionHandler(value = MissingServletRequestParameterException.class)
     public ResponseEntity<?> missingServletRequestParameterException(MissingServletRequestParameterException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(ExceptionCode.E00001, e.getMessage());
@@ -67,6 +92,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
     }
 
+    /**
+     * data type validation check
+     * @param e
+     * @return HTTP code : 400, error message
+     */
     @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
     public ResponseEntity<?> methodArgumentTypeMismatchExceptionException(MethodArgumentTypeMismatchException e) {
         ExceptionResponse exceptionResponse =
@@ -75,6 +105,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
     }
 
+    /**
+     * Request DTO data Validation check
+     * @param e
+     * @return HTTP code : 400, error message
+     */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<?> methodArgumentNotValidException(MethodArgumentNotValidException e) {
         HashMap<String, String> params = new HashMap<>();
@@ -87,6 +122,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
     }
 
+    /**
+     * Request body data 에서 발생하는 예외를 체크. <p>
+     * (ex. data type mismatch, deserialization error .. )
+     * @param e
+     * @return HTTP code : 400, error message
+     */
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ResponseEntity<?> httpMessageNotReadableException(HttpMessageNotReadableException e) {
         Throwable throwable = e.getMostSpecificCause();
@@ -111,6 +152,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
     }
 
+    /**
+     * jwt 토큰 검증시 발생할 수 있는 예외를 체크.
+     * @param e
+     * @return HTTP code : 401, error message
+     */
     @ExceptionHandler(value = JwtException.class)
     public ResponseEntity<?> jwtException(JwtException e) {
         ExceptionResponse exceptionResponse;
@@ -137,6 +183,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionResponse);
     }
 
+    /**
+     * 예측할 수 없는 모든 예외를 체크
+     * @param e
+     * @return HTTP code : 500, error message
+     */
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<?> serverException(Exception e) {
         logger.error("Server Exception: ", e);
