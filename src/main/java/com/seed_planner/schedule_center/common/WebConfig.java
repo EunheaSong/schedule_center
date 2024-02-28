@@ -13,7 +13,9 @@ public class WebConfig implements WebMvcConfigurer {
     private final AuthInterceptor authInterceptor;
 
     // 토큰이 필요하지 않은 uri
-    private static final String[] EXCLUDE_PATHS = {};
+    private static final String[] EXCLUDE_PATHS = {
+        "/member/exist", "/member/sign-up"
+    };
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
