@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class ExceptionResponse extends CustomResponse {
     private Object detail;
 
-    ExceptionResponse(ExceptionCode exceptionCode, Object value) {
+    public ExceptionResponse(ExceptionCode exceptionCode, Object value) {
         super(exceptionCode);
         this.detail = value;
     }

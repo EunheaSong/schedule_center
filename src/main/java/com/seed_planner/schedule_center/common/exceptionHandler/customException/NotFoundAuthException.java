@@ -8,7 +8,7 @@ public class NotFoundAuthException extends IllegalArgumentException {
 
     private final CustomResponse errorMessage;
 
-    NotFoundAuthException(CustomResponse errorMessage) {
+    public NotFoundAuthException(CustomResponse errorMessage) {
         this.errorMessage = errorMessage;
     }
 }

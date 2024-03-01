@@ -9,7 +9,7 @@ public class CustomResponse {
     private String code;
     private String message;
 
-    CustomResponse(ExceptionCode exceptionCode) {
+    public CustomResponse(ExceptionCode exceptionCode) {
         this.code = exceptionCode.name();
         this.message = exceptionCode.getMessage();
     }
