@@ -6,17 +6,31 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class MemberDomain extends BaseDomain {
+public class MemberDomain {
     private String email;
 
     private String password;
 
     private String kakaoId;
 
+    private BaseDomain baseDomain;
+
     public MemberDomain(String email, String password) {
-        super();
         this.email = email;
         this.password = password;
         this.kakaoId = null;
+        this.baseDomain = null;
+    }
+
+    public MemberDomain(
+        String email,
+        String password,
+        String kakaoId,
+        BaseDomain baseDomain
+    ) {
+        this.email = email;
+        this.password = password;
+        this.kakaoId = kakaoId;
+        this.baseDomain = baseDomain;
     }
 }

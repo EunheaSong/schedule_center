@@ -14,11 +14,17 @@ public class MemberPersistencePort implements MemberInfoPort, UpdateMemberPort {
     private final MemberRepository memberRepository;
 
     @Override
-    public boolean existByEmail(String email) {
-        return memberRepository.existsByEmail(email);
+    public boolean existsByEmailAndIsDeleted(String email, boolean isDeleted) {
+        return memberRepository.existsByEmailAndIsDeleted(email, isDeleted);
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public MemberDomain getByEmailAndIsDeleted(String email, boolean isDeleted) {
+        return memberMapper.entityToDomain(
+            memberRepository.findByEmailAndIsDeleted(email, isDeleted)
+        );
+    }
+
     @Override
     public void create(MemberDomain member) {
         memberRepository.save(memberMapper.domainToEntity(member));

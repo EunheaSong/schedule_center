@@ -15,6 +15,6 @@ class MemberServiceTest {
 
     @Test
     void checkEmailDuplication() {
-        assertFalse(memberInfoPort.existByEmail("test@123.com"));
+        assertFalse(memberInfoPort.existsByEmailAndIsDeleted("test@123.com", false));
     }
 }
