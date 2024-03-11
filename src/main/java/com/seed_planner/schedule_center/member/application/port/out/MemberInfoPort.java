@@ -7,4 +7,5 @@ public interface MemberInfoPort {
 
     MemberDomain getByEmailAndIsDeleted(String email, boolean isDeleted);
 
+
 }

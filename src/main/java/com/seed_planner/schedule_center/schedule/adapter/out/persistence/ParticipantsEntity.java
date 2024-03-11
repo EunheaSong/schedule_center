@@ -2,16 +2,26 @@ package com.seed_planner.schedule_center.schedule.adapter.out.persistence;
 
 import com.seed_planner.schedule_center.common.model.BaseEntity;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Entity
-public class ParticipantsEntity extends BaseEntity {
+class ParticipantsEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    private MemberEntity userId;
+    @JoinColumn(name = "member_id")
+    private MemberEntity member;
+    @Column(length = 30)
     private String name;
+    @Column
     private String imagePath;
+
+    ParticipantsEntity(String name, String imagePath) {
+        this.name = name;
+        this.imagePath = imagePath;
+    }
 }

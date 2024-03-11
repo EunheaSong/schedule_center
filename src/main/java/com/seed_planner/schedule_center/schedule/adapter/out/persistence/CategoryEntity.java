@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 @Entity
-public class CategoryEntity extends BaseEntity {
+class CategoryEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private MemberEntity userId;
     private String name;

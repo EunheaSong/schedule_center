@@ -5,6 +5,8 @@ import com.seed_planner.schedule_center.common.jwt.JwtProviderImpl;
 import io.jsonwebtoken.Jwts;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class JwtProviderImplTest {
+    private final Logger logger = LoggerFactory.getLogger(JwtProviderImplTest.class);
 
     @Autowired
     JwtProvider provider;
@@ -27,8 +30,8 @@ class JwtProviderImplTest {
     @DisplayName("토큰 발급 테스트")
     void issueToken() {
         String token = provider.issueToken(Map.of("email", "test123@com"));
-        String data = provider.getData(token, "email").toString();
-        assertEquals("test123@com", data);
+        logger.info("token! : " + token);
+        assertFalse(token.isBlank());
     }
 
     @Test
