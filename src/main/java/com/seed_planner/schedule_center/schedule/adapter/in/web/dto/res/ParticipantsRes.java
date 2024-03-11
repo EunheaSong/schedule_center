@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class ParticipnatsRes {
+public class ParticipantsRes {
     private String name;
     private String imagePath;
     private String id;

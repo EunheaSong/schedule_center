@@ -1,13 +1,11 @@
 package com.seed_planner.schedule_center.schedule.adapter.out.persistence;
 
-import com.seed_planner.schedule_center.schedule.domain.ParticipantsDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor

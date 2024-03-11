@@ -1,7 +1,7 @@
 package com.seed_planner.schedule_center.schedule.application.service;
 
 import com.seed_planner.schedule_center.schedule.adapter.in.web.dto.req.ParticipantsReq;
-import com.seed_planner.schedule_center.schedule.adapter.in.web.dto.res.ParticipnatsRes;
+import com.seed_planner.schedule_center.schedule.adapter.in.web.dto.res.ParticipantsRes;
 import com.seed_planner.schedule_center.schedule.application.port.in.ParticipantsCRUDInPort;
 import com.seed_planner.schedule_center.schedule.application.port.out.ParticipantsCRUDOutPort;
 import com.seed_planner.schedule_center.schedule.domain.ParticipantsDomain;
@@ -19,7 +19,7 @@ class ParticipantsService implements ParticipantsCRUDInPort {
 
     @Transactional
     @Override
-    public List<ParticipnatsRes> createParticipants(List<ParticipantsReq> req, String memberId) {
+    public List<ParticipantsRes> createParticipants(List<ParticipantsReq> req, String memberId) {
         List<ParticipantsDomain> participantsDomainsList = req.stream()
             .map(it -> new ParticipantsDomain(it.getName(), it.getImagePath()))
             .collect(Collectors.toList());

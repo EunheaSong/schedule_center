@@ -1,7 +1,7 @@
 package com.seed_planner.schedule_center.schedule.adapter.in.web;
 
 import com.seed_planner.schedule_center.schedule.adapter.in.web.dto.req.ParticipantsReq;
-import com.seed_planner.schedule_center.schedule.adapter.in.web.dto.res.ParticipnatsRes;
+import com.seed_planner.schedule_center.schedule.adapter.in.web.dto.res.ParticipantsRes;
 import com.seed_planner.schedule_center.schedule.application.port.in.ParticipantsCRUDInPort;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class ParticipantsController {
 
     //참여자 생성
     @PostMapping("")
-    public ResponseEntity<List<ParticipnatsRes>> createParticipants(
+    public ResponseEntity<List<ParticipantsRes>> createParticipants(
         @RequestBody List<ParticipantsReq> req,
         HttpServletRequest request
     ) {
