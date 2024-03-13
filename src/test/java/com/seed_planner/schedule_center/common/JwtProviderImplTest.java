@@ -3,6 +3,7 @@ package com.seed_planner.schedule_center.common;
 import com.seed_planner.schedule_center.common.jwt.JwtProvider;
 import com.seed_planner.schedule_center.common.jwt.JwtProviderImpl;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Map;
 
@@ -54,7 +56,7 @@ class JwtProviderImplTest {
         String token = Jwts.builder()
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + 5000))
-            .signWith(JwtProviderImpl.getKey(secretKey))
+            .signWith(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
             .compact();
         Thread.sleep(6000);
         try {
