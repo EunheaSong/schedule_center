@@ -50,7 +50,7 @@ class MemberService implements AuthCheckPort {
         if (!req.getPassword().equals(member.getPassword())) {
             throw new BadRequestException(new CustomResponse(E10000));
         }
-        return jwtProvider.issueToken(Map.of("id", member.getBaseDomain().getId()));
+        return jwtProvider.issueToken(Map.of("memberId", member.getBaseDomain().getId()));
     }
 
 }
