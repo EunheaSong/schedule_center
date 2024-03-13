@@ -1,10 +1,10 @@
 package com.seed_planner.schedule_center.schedule.application.service;
 
-import com.seed_planner.schedule_center.schedule.adapter.in.web.dto.req.ParticipantsReq;
-import com.seed_planner.schedule_center.schedule.adapter.in.web.dto.req.ParticipantsUpdateReq;
-import com.seed_planner.schedule_center.schedule.adapter.in.web.dto.res.ParticipantsRes;
-import com.seed_planner.schedule_center.schedule.application.port.out.ParticipantsCRUDOutPort;
-import com.seed_planner.schedule_center.schedule.domain.ParticipantsDomain;
+import com.seed_planner.schedule_center.plan.adapter.in.web.dto.req.ParticipantsReq;
+import com.seed_planner.schedule_center.plan.adapter.in.web.dto.req.ParticipantsUpdateReq;
+import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ParticipantsRes;
+import com.seed_planner.schedule_center.plan.application.port.out.ParticipantsCRUDOutPort;
+import com.seed_planner.schedule_center.plan.domain.ParticipantsDomain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
