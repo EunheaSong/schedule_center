@@ -8,27 +8,29 @@ import com.seed_planner.schedule_center.schedule.domain.ParticipantsDomain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class ParticipantsServiceTest {
 
-    private Logger logger = LoggerFactory.getLogger(ParticipantsServiceTest.class);
 
     @Autowired
-    private ParticipantsCRUDOutPort crudOutPort;
+    private final ParticipantsCRUDOutPort crudOutPort;
 
     String memberId = "22ca287f21c14f5";
     String name = "";
     String imagePath = null;
+
+    ParticipantsServiceTest(ParticipantsCRUDOutPort crudOutPort) {
+        this.crudOutPort = crudOutPort;
+    }
 
     @BeforeAll
     static void setUp() {
@@ -56,7 +58,7 @@ class ParticipantsServiceTest {
             new ParticipantsReq(name, imagePath)
         );
         try {
-        List<ParticipantsDomain> domainList = req.stream()
+        req.stream()
             .map(it -> new ParticipantsDomain(it.getName(), it.getImagePath()))
             .toList();
         } catch (Exception e) {
@@ -74,7 +76,7 @@ class ParticipantsServiceTest {
             new ParticipantsReq(name, imagePath)
         );
         try {
-            List<ParticipantsDomain> domainList = req.stream()
+            req.stream()
                 .map(it -> new ParticipantsDomain(it.getName(), it.getImagePath()))
                 .toList();
         } catch (Exception e) {

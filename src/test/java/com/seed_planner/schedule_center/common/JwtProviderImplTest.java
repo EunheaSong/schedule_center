@@ -1,7 +1,6 @@
 package com.seed_planner.schedule_center.common;
 
 import com.seed_planner.schedule_center.common.jwt.JwtProvider;
-import com.seed_planner.schedule_center.common.jwt.JwtProviderImpl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.junit.jupiter.api.DisplayName;
