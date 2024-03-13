@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ParticipantsCRUDOutPort {
     List<ParticipantsRes> createParticipants(List<ParticipantsDomain> domainList, String memberId);
+    List<ParticipantsRes> updateParticipants(List<ParticipantsDomain> domainList, String memberId);
 }

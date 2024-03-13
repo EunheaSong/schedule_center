@@ -14,4 +14,8 @@ public class BaseDomain {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private boolean isDeleted;
+
+    public BaseDomain(String id) {
+        this.id = id;
+    }
 }

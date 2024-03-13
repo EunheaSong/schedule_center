@@ -17,7 +17,6 @@ public class BatchRepository {
     public void participantsSaveAll(List<ParticipantsEntity> participantsList, String memberId) {
         String sql = "INSERT INTO participants (id, name, image_path, created_at, modified_at, member_id, is_deleted)" +
             "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
         jdbcTemplate.batchUpdate(
             sql,
             participantsList,

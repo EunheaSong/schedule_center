@@ -15,16 +15,20 @@ public class ParticipantsDomain {
     private MemberDomain member;
     private BaseDomain baseDomain;
 
-    private ParticipantsDomain(String imagePath) {
-        this.imagePath = imagePath;
-    }
     public ParticipantsDomain(String name, String imagePath) {
         this.imagePath = imagePath;
         setName(name);
     }
 
+    public ParticipantsDomain(String name, String imagePath, String id) {
+        this.imagePath = imagePath;
+        this.baseDomain = new BaseDomain(id);
+        setName(name);
+    }
+
     private void setName(String name) {
         if (name.length() > 30) throw new IllegalArgumentException("participants name of max length is 30");
+        if (name.isBlank()) throw new IllegalArgumentException("participants name is blank.");
         this.name = name;
     }
 }
