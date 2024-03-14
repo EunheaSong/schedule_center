@@ -5,7 +5,8 @@ import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.Participants
 
 import java.util.List;
 
-public interface ParticipantsUpdatePort {
+public interface ParticipantsUpdateOutPort {
     List<ParticipantsRes> createParticipants(List<ParticipantsDomain> domainList, String memberId);
     List<ParticipantsRes> updateParticipants(List<ParticipantsDomain> domainList, String memberId);
+    void isDeletedUpdate(String[] idList, boolean state, String memberId);
 }

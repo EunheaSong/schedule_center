@@ -1,7 +1,7 @@
 package com.seed_planner.schedule_center.plan.adapter.out.persistence;
 
 import com.seed_planner.schedule_center.plan.application.port.out.ParticipantsInfoPort;
-import com.seed_planner.schedule_center.plan.application.port.out.ParticipantsUpdatePort;
+import com.seed_planner.schedule_center.plan.application.port.out.ParticipantsUpdateOutPort;
 import com.seed_planner.schedule_center.plan.domain.ParticipantsDomain;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ParticipantsRes;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-public class ParticipantsPersistencePort implements ParticipantsUpdatePort, ParticipantsInfoPort {
+public class ParticipantsPersistencePort implements ParticipantsUpdateOutPort, ParticipantsInfoPort {
     private final ParticipantsRepository participantsRepository;
     private final ParticipantsMapper participantsMapper;
     private final BatchRepository batchRepository;
@@ -36,6 +36,11 @@ public class ParticipantsPersistencePort implements ParticipantsUpdatePort, Part
             res.add(new ParticipantsRes(domain));
         }
         return res;
+    }
+
+    @Override
+    public void isDeletedUpdate(String[] idList, boolean state, String memberId) {
+        participantsRepository.isDeletedUpdate(idList, state, memberId);
     }
 
 

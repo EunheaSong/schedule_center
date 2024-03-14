@@ -1,6 +1,7 @@
 package com.seed_planner.schedule_center.plan.adapter.out.persistence.querydsl;
 
 import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQueryFactory;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ParticipantsRes;
 import com.seed_planner.schedule_center.plan.domain.ParticipantsDomain;
@@ -45,6 +46,20 @@ class ParticipantsQRepositoryImpl implements ParticipantsQRepository {
             .innerJoin(memberEntity).on(participantsEntity.member.eq(memberEntity))
             .where(memberEntity.id.eq(memberId).and(participantsEntity.isDeleted.isFalse()))
             .fetch();
+    }
+
+    @Override
+    public void isDeletedUpdate(String[] idList, boolean state, String memberId) {
+        queryFactory.update(participantsEntity)
+            .set(participantsEntity.isDeleted, state)
+            .where(participantsEntity.id.in(idList)
+                .and(participantsEntity.member.eq(
+                    JPAExpressions.select(memberEntity)
+                        .where(memberEntity.id.eq(memberId))
+                    )
+                )
+            )
+            .execute();
     }
 
 }

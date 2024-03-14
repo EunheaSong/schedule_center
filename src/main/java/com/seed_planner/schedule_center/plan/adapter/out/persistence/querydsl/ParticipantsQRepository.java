@@ -8,4 +8,5 @@ import java.util.List;
 public interface ParticipantsQRepository {
     void update(ParticipantsDomain domain);
     List<ParticipantsRes> getBasicInfoByMemberId(String memberId);
+    void isDeletedUpdate(String[] idList, boolean state, String memberId);
 }
