@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 public class SubScheduleEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    private ScheduleEntity scheduleId;
+    private ScheduleEntity schedule;
     @Column(nullable = false, length = 50)
     private String name;
     @Column(nullable = false)

@@ -11,7 +11,7 @@ import lombok.Getter;
 @Entity
 class CategoryEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    private MemberEntity userId;
+    private MemberEntity member;
     private String name;
     private String color;
 }

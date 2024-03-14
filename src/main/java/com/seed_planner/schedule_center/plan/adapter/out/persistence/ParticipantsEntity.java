@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Entity
 class ParticipantsEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
     private MemberEntity member;
     @Column(length = 30)
     private String name;

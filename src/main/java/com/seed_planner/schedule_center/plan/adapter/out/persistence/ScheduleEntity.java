@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 class ScheduleEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    private MemberEntity memberId;
+    private MemberEntity member;
     @Column(nullable = false, length = 50)
     private String name;
     @Column(nullable = false)
