@@ -3,7 +3,7 @@ package com.seed_planner.schedule_center.schedule.application.service;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.req.ParticipantsReq;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.req.ParticipantsUpdateReq;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ParticipantsRes;
-import com.seed_planner.schedule_center.plan.application.port.out.ParticipantsCRUDOutPort;
+import com.seed_planner.schedule_center.plan.application.port.out.ParticipantsUpdatePort;
 import com.seed_planner.schedule_center.plan.domain.ParticipantsDomain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -22,13 +22,13 @@ class ParticipantsServiceTest {
 
 
     @Autowired
-    private final ParticipantsCRUDOutPort crudOutPort;
+    private final ParticipantsUpdatePort crudOutPort;
 
     String memberId = "22ca287f21c14f5";
     String name = "";
     String imagePath = null;
 
-    ParticipantsServiceTest(ParticipantsCRUDOutPort crudOutPort) {
+    ParticipantsServiceTest(ParticipantsUpdatePort crudOutPort) {
         this.crudOutPort = crudOutPort;
     }
 

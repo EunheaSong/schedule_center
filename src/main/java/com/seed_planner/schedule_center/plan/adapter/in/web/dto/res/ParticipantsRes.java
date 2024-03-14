@@ -14,12 +14,12 @@ public class ParticipantsRes {
     private String name;
     private String imagePath;
     private String id;
-    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
 
     public ParticipantsRes (ParticipantsDomain domain) {
         this.name = domain.getName();
         this.imagePath = domain.getImagePath();
         this.id = domain.getBaseDomain().getId();
-        this.createdAt = domain.getBaseDomain().getCreatedAt();
+        this.modifiedAt = domain.getBaseDomain().getModifiedAt();
     }
 }

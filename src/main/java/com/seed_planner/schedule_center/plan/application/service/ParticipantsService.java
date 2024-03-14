@@ -4,7 +4,7 @@ import com.seed_planner.schedule_center.plan.adapter.in.web.dto.req.Participants
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.req.ParticipantsUpdateReq;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ParticipantsRes;
 import com.seed_planner.schedule_center.plan.application.port.in.ParticipantsCRUDInPort;
-import com.seed_planner.schedule_center.plan.application.port.out.ParticipantsCRUDOutPort;
+import com.seed_planner.schedule_center.plan.application.port.out.ParticipantsUpdatePort;
 import com.seed_planner.schedule_center.plan.domain.ParticipantsDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 class ParticipantsService implements ParticipantsCRUDInPort {
-    private final ParticipantsCRUDOutPort crudOutPort;
+    private final ParticipantsUpdatePort crudOutPort;
 
     @Transactional(rollbackFor = Exception.class)
     @Override

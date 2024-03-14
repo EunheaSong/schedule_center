@@ -1,5 +1,7 @@
 package com.seed_planner.schedule_center.common;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,4 +18,7 @@ public class Utils {
         return md.digest().toString();
     }
 
+    public static String getMemberId(HttpServletRequest request) {
+        return request.getAttribute("memberId").toString();
+    }
 }
