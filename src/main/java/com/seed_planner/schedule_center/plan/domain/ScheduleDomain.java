@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class ScheduleDomain {
     private MemberDomain member;
 //    @Column(nullable = false, length = 50)
-    private String name;
+    private String title;
 //    @Column(nullable = false)
     private LocalDateTime startedAt;
 //    @Column(nullable = false)

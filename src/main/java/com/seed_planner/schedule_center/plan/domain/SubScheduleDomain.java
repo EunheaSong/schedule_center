@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class SubScheduleDomain {
     private ScheduleDomain schedule;
 //    @Column(nullable = false, length = 50)
-    private String name;
+    private String title;
 //    @Column(nullable = false)
     private LocalDateTime startedAt;
 //    @Column(nullable = false)

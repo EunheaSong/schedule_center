@@ -16,7 +16,7 @@ class ScheduleEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private MemberEntity member;
     @Column(nullable = false, length = 50)
-    private String name;
+    private String title;
     @Column(nullable = false)
     private LocalDateTime startedAt;
     @Column(nullable = false)

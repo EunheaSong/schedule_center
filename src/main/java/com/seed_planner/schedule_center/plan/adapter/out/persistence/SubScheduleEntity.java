@@ -15,7 +15,7 @@ public class SubScheduleEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private ScheduleEntity schedule;
     @Column(nullable = false, length = 50)
-    private String name;
+    private String title;
     @Column(nullable = false)
     private LocalDateTime startedAt;
     @Column(nullable = false)
