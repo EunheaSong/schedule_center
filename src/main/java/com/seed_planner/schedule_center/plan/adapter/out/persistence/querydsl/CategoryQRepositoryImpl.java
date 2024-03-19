@@ -1,7 +1,7 @@
 package com.seed_planner.schedule_center.plan.adapter.out.persistence.querydsl;
 
 import com.querydsl.core.types.Projections;
-import com.querydsl.jpa.JPQLQueryFactory;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.CategoryRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,7 +15,7 @@ import static com.seed_planner.schedule_center.plan.adapter.out.persistence.QCat
 @Repository
 public class CategoryQRepositoryImpl implements CategoryQRepository {
 
-    private final JPQLQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     @Override
     public List<CategoryRes> getBasicInfoByMemberId(String memberId) {
