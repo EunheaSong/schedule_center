@@ -1,14 +1,37 @@
 package com.seed_planner.schedule_center.plan.adapter.out.persistence;
 
-import com.seed_planner.schedule_center.plan.application.port.out.ScheduleUpdateOutPortTest;
-import com.seed_planner.schedule_center.plan.domain.ScheduleDomain;
+import com.seed_planner.schedule_center.common.TestSetUp;
+import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberPersistencePortTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+//@ExtendWith(MockitoExtension.class)
+class SchedulePersistencePortTest extends TestSetUp {
+    @Mock
+    private ScheduleRepositoryTest scheduleRepositoryTest;
+    @Mock
+    private ScheduleMapperTest scheduleMapperTest;
+    @Mock
+    private MemberPersistencePortTest memberPersistencePortTest;
 
-class SchedulePersistencePortTest implements ScheduleUpdateOutPortTest {
+    @BeforeEach
+    void setting() {
 
-    @Override
-    public void create(ScheduleDomain domain) {
-        
+    }
+
+    @Test
+    public void create() {
+//        String memberId = member.getId();
+//        MemberEntity memberEntity = memberPersistencePortTest.findByIdAndIsDeletedFalse(memberId);
+//        ScheduleEntity schedule = scheduleMapperTest.domainToEntity(domain, memberEntity);
+//        ScheduleEntity result = scheduleRepository.save(
+//            schedule
+//        );
+//        assertEquals(memberId, memberEntity.getId());
+//        assertEquals(schedule.getId(), result.getId());
     }
 }
