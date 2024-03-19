@@ -3,6 +3,7 @@ package com.seed_planner.schedule_center.plan.adapter.out.persistence.querydsl;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQueryFactory;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ParticipantsRes;
 import com.seed_planner.schedule_center.plan.domain.ParticipantsDomain;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ import static com.seed_planner.schedule_center.plan.adapter.out.persistence.QPar
 @Repository
 @RequiredArgsConstructor
 class ParticipantsQRepositoryImpl implements ParticipantsQRepository {
-    private final JPQLQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     @Transactional
     public void update(ParticipantsDomain domain) {
