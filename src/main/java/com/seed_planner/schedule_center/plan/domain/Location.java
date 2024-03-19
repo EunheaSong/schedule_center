@@ -10,4 +10,9 @@ public class Location {
     private Double lat;
     private Double lng;
     private String address;
+
+    @Override
+    public String toString() {
+        return "Lat : " + this.lat + ", Lng : " + this.lng + ", Address : " + this.address;
+    }
 }

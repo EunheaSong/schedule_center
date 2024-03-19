@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public class SubScheduleDomain extends BaseSchedule {
-    private final ScheduleDomain schedule;
+    private ScheduleDomain schedule;
 
     @Setter
     public static class Builder extends BaseSchedule.Builder<Builder> {

@@ -20,7 +20,7 @@ public abstract class BaseSchedule {
     private final LocalDateTime endedAt;
     @Length(max = 50, message = "")
     private String place;
-    private final Location location;
+    private Location location;
     private Memo memo;
     private String imagePath;
     private BaseDomain baseDomain;

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public class ScheduleDomain extends BaseSchedule {
-    private final MemberDomain member;
+    private MemberDomain member;
 //    @NotNull
 //    private BaseSchedule baseSchedule;
 //    @Length(max = 50, message = "")
