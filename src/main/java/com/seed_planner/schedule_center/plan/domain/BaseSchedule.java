@@ -1,10 +1,8 @@
 package com.seed_planner.schedule_center.plan.domain;
 
 import com.seed_planner.schedule_center.common.model.BaseDomain;
-
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDateTime;
