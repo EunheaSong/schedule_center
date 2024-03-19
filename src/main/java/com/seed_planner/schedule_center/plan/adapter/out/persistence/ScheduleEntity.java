@@ -6,10 +6,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Entity
 class ScheduleEntity extends BaseEntity {
@@ -37,4 +41,5 @@ class ScheduleEntity extends BaseEntity {
     private String participantsId;
     @Column
     private String categoryId;
+
 }

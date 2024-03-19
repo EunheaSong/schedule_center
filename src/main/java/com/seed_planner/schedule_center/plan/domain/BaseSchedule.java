@@ -14,9 +14,7 @@ public abstract class BaseSchedule {
     @NotBlank
     @Length(max = 50, message = "")
     private final String title;
-//    @NotNull
     private final LocalDateTime startedAt;
-//    @NotNull
     private final LocalDateTime endedAt;
     @Length(max = 50, message = "")
     private String place;
@@ -25,13 +23,10 @@ public abstract class BaseSchedule {
     private String imagePath;
     private BaseDomain baseDomain;
 
-
-
-    @Setter
     public abstract static class Builder <T extends Builder<T>> {
-        private String title;
-        private LocalDateTime startedAt;
-        private LocalDateTime endedAt;
+        private final String title;
+        private final LocalDateTime startedAt;
+        private final LocalDateTime endedAt;
         private String place;
         private Location location;
         private Memo memo;
@@ -46,6 +41,31 @@ public abstract class BaseSchedule {
         protected abstract T self();
 
         abstract BaseSchedule build();
+
+        public Builder setPlace(String place) {
+            this.place = place;
+            return this;
+        }
+
+        public Builder setLocation(Location location) {
+            this.location = location;
+            return this;
+        }
+
+        public Builder setMemo(Memo memo) {
+            this.memo = memo;
+            return this;
+        }
+
+        public Builder setImagePath(String imagePath) {
+            this.imagePath = imagePath;
+            return this;
+        }
+
+        public Builder setBaseDomain(BaseDomain baseDomain) {
+            this.baseDomain = baseDomain;
+            return this;
+        }
     }
 
     BaseSchedule(Builder<?> builder) {

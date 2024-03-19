@@ -1,5 +1,6 @@
 package com.seed_planner.schedule_center.plan.domain;
 
+import com.google.gson.Gson;
 import com.seed_planner.schedule_center.member.domain.MemberDomain;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,17 +10,12 @@ import java.time.LocalDateTime;
 @Getter
 public class ScheduleDomain extends BaseSchedule {
     private MemberDomain member;
-//    @NotNull
-//    private BaseSchedule baseSchedule;
-//    @Length(max = 50, message = "")
-//    private String place;
-//    private Location location;
-//    private Memo memo;
-//    private String imagePath;
-//    private BaseDomain baseDomain;
     private String[] participantsId;
     private String categoryId;
 
+    public String toStringParticipantsId() {
+        return new Gson().toJson(this.participantsId);
+    }
 
     @Setter
     public static class Builder extends BaseSchedule.Builder<Builder> {
@@ -27,7 +23,7 @@ public class ScheduleDomain extends BaseSchedule {
         private String[] participantsId;
         private String categoryId;
 
-        public Builder(String title, LocalDateTime startedAt, LocalDateTime endedAt, ScheduleDomain schedule) {
+        public Builder(String title, LocalDateTime startedAt, LocalDateTime endedAt) {
             super(title, startedAt, endedAt);
         }
 
@@ -37,7 +33,7 @@ public class ScheduleDomain extends BaseSchedule {
         }
 
         @Override
-        ScheduleDomain build() {
+        public ScheduleDomain build() {
             return new ScheduleDomain(this);
         }
     }

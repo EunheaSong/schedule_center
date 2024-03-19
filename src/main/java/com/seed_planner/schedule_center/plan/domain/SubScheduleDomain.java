@@ -31,6 +31,9 @@ public class SubScheduleDomain extends BaseSchedule {
         super(builder);
         this.schedule = builder.schedule;
     }
+
+}
+
 //    @NotNull
 //    private BaseSchedule baseSchedule;
 //    @Length(max = 50)
@@ -39,5 +42,3 @@ public class SubScheduleDomain extends BaseSchedule {
 //    private Memo memo;
 //    private String imagePath;
 //    private BaseDomain baseDomain;
-
-}
