@@ -14,4 +14,6 @@ interface MemberRepository extends JpaRepository<MemberEntity, String> {
         select m.password from MemberEntity m where m.email = :email
     """)
     String getPasswordByEmail(@Param("email") String email);
+
+    MemberEntity findByIdAndIsDeletedFalse(String id);
 }

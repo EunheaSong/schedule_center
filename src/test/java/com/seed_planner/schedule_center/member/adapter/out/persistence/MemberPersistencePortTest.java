@@ -9,8 +9,11 @@ public class MemberPersistencePortTest {
     @Mock
     private MemberRepositoryTest memberRepositoryTest;
 
-    public void createMember(MemberEntity memberEntity) {
-        memberRepositoryTest.save(memberEntity);
+    public MemberEntity createMember(MemberEntity memberEntity) {
+        return memberRepositoryTest.save(memberEntity);
     }
 
+    public MemberEntity findByIdAndIsDeletedFalse(String id) {
+        return memberRepositoryTest.findByIdAndIsDeletedFalse(id);
+    }
 }

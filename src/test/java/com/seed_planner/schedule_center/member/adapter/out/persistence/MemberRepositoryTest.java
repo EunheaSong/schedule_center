@@ -11,7 +11,11 @@ public class MemberRepositoryTest {
     @Autowired
     private MemberRepository memberRepository;
 
-    public void save(MemberEntity member) {
-        memberRepository.save(member);
+    public MemberEntity save(MemberEntity member) {
+        return memberRepository.save(member);
+    }
+
+    public MemberEntity findByIdAndIsDeletedFalse(String id) {
+        return memberRepository.findByIdAndIsDeletedFalse(id);
     }
 }

@@ -16,17 +16,19 @@ public class TestSetUp {
     @Mock
     private JwtProvider jwtProvider;
     @Mock
+    private QueryDslConfig queryDslConfig;
+    @Mock
     private static MemberPersistencePortTest memberPersistencePortTest;
     public static MemberEntity member;
 
     @BeforeEach
     public void setupMemberData() {
-        member = new MemberEntity(
-            "email@aaaa.com",
-            "passsss",
-            ""
+        member = memberPersistencePortTest.createMember(
+            new MemberEntity(
+                "email@aaaa.com",
+                "passsss",
+                ""
+            )
         );
-        memberPersistencePortTest.createMember(member);
     }
-
 }
