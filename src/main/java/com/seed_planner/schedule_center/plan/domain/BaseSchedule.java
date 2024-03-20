@@ -1,20 +1,15 @@
 package com.seed_planner.schedule_center.plan.domain;
 
 import com.seed_planner.schedule_center.common.model.BaseDomain;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
-import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDateTime;
 
 @Getter
 public abstract class BaseSchedule {
-    @NotBlank
-    @Length(max = 50, message = "")
     private final String title;
     private final LocalDateTime startedAt;
     private final LocalDateTime endedAt;
-    @Length(max = 50, message = "")
     private String place;
     private Location location;
     private Memo memo;
@@ -40,34 +35,35 @@ public abstract class BaseSchedule {
 
         abstract BaseSchedule build();
 
-        public Builder setPlace(String place) {
+        public T setPlace(String place) {
             this.place = place;
-            return this;
+            return self();
         }
 
-        public Builder setLocation(Location location) {
+        public T setLocation(Location location) {
             this.location = location;
-            return this;
+            return self();
         }
 
-        public Builder setMemo(Memo memo) {
+        public T setMemo(Memo memo) {
             this.memo = memo;
-            return this;
+            return self();
         }
 
-        public Builder setImagePath(String imagePath) {
+        public T setImagePath(String imagePath) {
             this.imagePath = imagePath;
-            return this;
+            return self();
         }
 
-        public Builder setBaseDomain(BaseDomain baseDomain) {
+        public T setBaseDomain(BaseDomain baseDomain) {
             this.baseDomain = baseDomain;
-            return this;
+            return self();
         }
     }
 
     BaseSchedule(Builder<?> builder) {
-        basicInfoValid(builder.startedAt, builder.endedAt);
+        basicInfoValid(builder.title, builder.startedAt, builder.endedAt);
+        placeValid(builder.place);
         this.title = builder.title;
         this.startedAt = builder.startedAt;
         this.endedAt = builder.endedAt;
@@ -78,7 +74,12 @@ public abstract class BaseSchedule {
         this.baseDomain = builder.baseDomain;
     }
 
-    private void basicInfoValid(LocalDateTime startedAt, LocalDateTime endedAt) {
-        if (startedAt.isAfter(endedAt)) throw new IllegalArgumentException("startedAt is after endedAt.");
+    private void basicInfoValid(String title, LocalDateTime startedAt, LocalDateTime endedAt) {
+        if (title.length() > 50) throw new IllegalArgumentException("title length exceeded. param length : " + title.length());
+        if (startedAt.isAfter(endedAt)) throw new IllegalArgumentException("startedAt is after endedAt.\nstartedAt : " + startedAt + " endedAt : " + endedAt);
+    }
+
+    private void placeValid(String place) {
+        if (place.length() > 50) throw new IllegalArgumentException("place length exceeded. param length : " + place.length());
     }
 }
