@@ -16,7 +16,6 @@ public class JwtProviderImpl implements JwtProvider {
 
     private final int ACCESS_EXPIRATION;
     private final String JWT_SECRET_KEY;
-
     private static final String BEARER = "Bearer";
 
     public JwtProviderImpl(
@@ -36,14 +35,16 @@ public class JwtProviderImpl implements JwtProvider {
             .compact();
     }
 
-    public void isValidToken(String token) {
+    public String isValidToken(String token) {
         if (token.isEmpty() || token.isBlank()) throw new IllegalArgumentException("Token is empty or blank.");
         String[] tokens = token.split(" ");
         if (!tokens[0].equals(BEARER)) throw new IllegalArgumentException("This is malformed token.");
-        getClaims(tokens[1]).getExpiration();
+        Claims claims = getClaims(tokens[1]);
+        claims.getExpiration();
+        return claims.get("memberId").toString();
     }
 
-    public Claims getClaims(String token) {
+    private Claims getClaims(String token) {
         return Jwts.parserBuilder()
             .setSigningKey(getKey(JWT_SECRET_KEY))
             .build()
@@ -51,12 +52,7 @@ public class JwtProviderImpl implements JwtProvider {
             .getBody();
     }
 
-    public Object getData(String token, String key) {
-        return getClaims(token).get(key);
-    }
-
-
-    public static Key getKey(String secretKey) {
+    private static Key getKey(String secretKey) {
         return Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }
 

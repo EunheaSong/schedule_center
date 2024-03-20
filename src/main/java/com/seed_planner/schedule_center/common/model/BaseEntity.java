@@ -19,11 +19,11 @@ public abstract class BaseEntity {
 
     @CreatedDate
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @LastModifiedDate
     @Column(nullable = false)
-    private LocalDateTime modifiedAt;
+    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     @Column(nullable = false)
     private boolean isDeleted = false;

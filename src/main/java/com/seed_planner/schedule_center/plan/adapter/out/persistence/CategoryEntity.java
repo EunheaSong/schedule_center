@@ -1,4 +1,4 @@
-package com.seed_planner.schedule_center.schedule.adapter.out.persistence;
+package com.seed_planner.schedule_center.plan.adapter.out.persistence;
 
 import com.seed_planner.schedule_center.common.model.BaseEntity;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
@@ -9,9 +9,9 @@ import lombok.Getter;
 
 @Getter
 @Entity
-public class ParticipantsEntity extends BaseEntity {
+class CategoryEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    private MemberEntity userId;
+    private MemberEntity member;
     private String name;
-    private String imagePath;
+    private String color;
 }

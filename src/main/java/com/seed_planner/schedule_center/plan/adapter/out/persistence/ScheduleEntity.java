@@ -1,4 +1,4 @@
-package com.seed_planner.schedule_center.schedule.adapter.out.persistence;
+package com.seed_planner.schedule_center.plan.adapter.out.persistence;
 
 import com.seed_planner.schedule_center.common.model.BaseEntity;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 class ScheduleEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    private MemberEntity memberId;
+    private MemberEntity member;
     @Column(nullable = false, length = 50)
     private String name;
     @Column(nullable = false)

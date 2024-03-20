@@ -21,7 +21,8 @@ public class AuthInterceptor implements HandlerInterceptor {
         Object handler
     ) {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
-        jwtProvider.isValidToken(token);
+        String memberId = jwtProvider.isValidToken(token);
+        request.setAttribute("memberId", memberId);
         return true;
     }
 }

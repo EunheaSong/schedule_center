@@ -1,8 +1,11 @@
 package com.seed_planner.schedule_center.common;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class Utils {
@@ -13,7 +16,10 @@ public class Utils {
     public static String encrypt(String data) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(data.getBytes(StandardCharsets.UTF_8));
-        return md.digest().toString();
+        return Arrays.toString(md.digest());
     }
 
+    public static String getMemberId(HttpServletRequest request) {
+        return request.getAttribute("memberId").toString();
+    }
 }

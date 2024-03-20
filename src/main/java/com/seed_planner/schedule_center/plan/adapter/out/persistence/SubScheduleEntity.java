@@ -1,4 +1,4 @@
-package com.seed_planner.schedule_center.schedule.adapter.out.persistence;
+package com.seed_planner.schedule_center.plan.adapter.out.persistence;
 
 import com.seed_planner.schedule_center.common.model.BaseEntity;
 import jakarta.persistence.Column;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 public class SubScheduleEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    private ScheduleEntity scheduleId;
+    private ScheduleEntity schedule;
     @Column(nullable = false, length = 50)
     private String name;
     @Column(nullable = false)
