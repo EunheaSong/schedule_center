@@ -1,13 +1,11 @@
 package com.seed_planner.schedule_center.common;
 
 import com.seed_planner.schedule_center.common.jwt.JwtProvider;
-import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
-import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberPersistencePortTest;
 import com.seed_planner.schedule_center.member.application.port.in.AuthCheckPort;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 
 @ExtendWith(MockitoExtension.class)
 public class TestSetUp {
@@ -15,20 +13,30 @@ public class TestSetUp {
     private AuthCheckPort authCheckPort;
     @Mock
     private JwtProvider jwtProvider;
-    @Mock
-    private QueryDslConfig queryDslConfig;
-    @Mock
-    private static MemberPersistencePortTest memberPersistencePortTest;
-    public static MemberEntity member;
+//        @Mock
+//    private static MemberMapper memberMapper = Mockito.mock(MemberMapper.class);
+//
+//    @Mock
+//    private static MemberPersistencePort memberPersistencePort = Mockito.mock(MemberPersistencePort.class);
+//    ;
+//
+//    @MockBean
+//    private MemberMapper memberMapper;
+//
+//    @MockBean
+//    public MemberPersistencePort memberPersistencePort;
+//
+//    public static MemberDomain memberDomain;
+//    public static MemberEntity memberEntity;
+//
+//
+//    @BeforeEach
+//    public void setupMemberData() {
+//        memberDomain = new MemberDomain("email@aaaa.com", "passsss");
+//        System.out.println("개열받노");
+//        memberEntity = memberMapper.domainToEntity(memberDomain);
+//        System.out.println("?");
+//        memberPersistencePort.create(memberDomain);
+//    }
 
-    @BeforeEach
-    public void setupMemberData() {
-        member = memberPersistencePortTest.createMember(
-            new MemberEntity(
-                "email@aaaa.com",
-                "passsss",
-                ""
-            )
-        );
-    }
 }
