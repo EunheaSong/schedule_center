@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ScheduleDomainTest extends TestSetUp {
 
-    private Logger logger = LoggerFactory.getLogger(ScheduleDomainTest.class);
+    private final Logger logger = LoggerFactory.getLogger(ScheduleDomainTest.class);
     private static String title = "아빠랑 밥먹기";
     private static LocalDateTime startedAt = LocalDateTime.now();
     private static LocalDateTime endedAt = LocalDateTime.now();
