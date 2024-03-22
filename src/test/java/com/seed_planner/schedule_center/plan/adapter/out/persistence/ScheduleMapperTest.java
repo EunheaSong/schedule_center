@@ -4,21 +4,16 @@ import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEnt
 import com.seed_planner.schedule_center.plan.domain.Location;
 import com.seed_planner.schedule_center.plan.domain.Memo;
 import com.seed_planner.schedule_center.plan.domain.ScheduleDomain;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.junit.jupiter.api.Assertions.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-import java.util.Optional;
-
 import static com.seed_planner.schedule_center.common.Utils.nullCheck;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockitoExtension.class)
 class ScheduleMapperTest {
@@ -42,7 +37,7 @@ class ScheduleMapperTest {
                 domain.toStringParticipantsId(),
                 domain.getCategoryId()
         );
-        System.out.println(s.getId());
+        logger.info(s.getId());
         return s;
     }
 

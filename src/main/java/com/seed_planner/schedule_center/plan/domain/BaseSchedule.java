@@ -80,6 +80,6 @@ public abstract class BaseSchedule {
     }
 
     private void placeValid(String place) {
-        if (place.length() > 50) throw new IllegalArgumentException("place length exceeded. param length : " + place.length());
+        if (place != null && place.length() > 50) throw new IllegalArgumentException("place length exceeded. param length : " + place.length());
     }
 }
