@@ -18,13 +18,12 @@ import org.slf4j.LoggerFactory;
 import java.util.Optional;
 
 import static com.seed_planner.schedule_center.common.Utils.nullCheck;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class ScheduleMapperTest {
 
-    private Logger logger = LoggerFactory.getLogger(ScheduleMapperTest.class);
+    private final Logger logger = LoggerFactory.getLogger(ScheduleMapperTest.class);
 
     ScheduleEntity domainToEntity(ScheduleDomain domain, MemberEntity memberEntity) {
         Location location = nullCheck(domain.getLocation(), new Location(null, null, null));
@@ -50,8 +49,7 @@ class ScheduleMapperTest {
     @Test
     @DisplayName("domain to entity 성공 테스트")
     public void domainToEntityTest() {
-        SchedulePersistencePortTest schedulePersistencePortTest = new SchedulePersistencePortTest();
-        ScheduleDomain domain = schedulePersistencePortTest.createSchedule();
+        ScheduleDomain domain = SchedulePersistencePortTest.createSchedule();
         MemberEntity memberEntity = new MemberEntity("email@aaaa.com", "passsss", "");
         ScheduleEntity entity = null;
         try {
@@ -74,7 +72,7 @@ class ScheduleMapperTest {
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
-        assertTrue(entity != null);
+        assertNotNull(entity);
         assertEquals(domain.getTitle(), entity.getTitle());
     }
 }
