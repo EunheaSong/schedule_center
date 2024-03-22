@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 public class ScheduleDomain extends BaseSchedule {
@@ -25,6 +26,21 @@ public class ScheduleDomain extends BaseSchedule {
 
         public Builder(String title, LocalDateTime startedAt, LocalDateTime endedAt) {
             super(title, startedAt, endedAt);
+        }
+
+        public Builder setCategoryId(String categoryId) {
+            this.categoryId = categoryId;
+            return self();
+        }
+
+        public Builder setParticipantsId(String[] participantsId) {
+            this.participantsId = participantsId;
+            return self();
+        }
+
+        public Builder setMember(MemberDomain member) {
+            this.member = member;
+            return self();
         }
 
         @Override
