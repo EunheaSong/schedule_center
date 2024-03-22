@@ -20,9 +20,12 @@ public class MemberPersistencePort implements MemberInfoPort, UpdateMemberPort {
 
     @Override
     public MemberDomain getByEmailAndIsDeleted(String email, boolean isDeleted) {
-        return memberMapper.entityToDomain(
-            memberRepository.findByEmailAndIsDeleted(email, isDeleted)
-        );
+        return memberMapper.entityToDomain(memberRepository.findByEmailAndIsDeleted(email, isDeleted));
+    }
+
+    @Override
+    public MemberDomain getByIdAndIsDeletedFalse(String id) {
+        return memberMapper.entityToDomain(memberRepository.findByIdAndIsDeletedFalse(id));
     }
 
     @Override
