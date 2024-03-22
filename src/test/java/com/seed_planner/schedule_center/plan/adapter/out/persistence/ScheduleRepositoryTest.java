@@ -11,8 +11,4 @@ class ScheduleRepositoryTest {
     @Autowired
     private ScheduleRepository scheduleRepository;
 
-//    @Test
-//    public void save() {
-//        scheduleRepository.save();
-//    }
 }

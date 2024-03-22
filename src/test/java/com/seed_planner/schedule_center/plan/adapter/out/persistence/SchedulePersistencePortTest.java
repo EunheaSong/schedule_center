@@ -25,7 +25,6 @@ class SchedulePersistencePortTest extends TestSetUp {
     public static MemberDomain memberDomain;
     public static MemberEntity memberEntity;
 
-
     @BeforeEach
     public void setupMemberData() {
         memberDomain = new MemberDomain("email@aaaa.com", "passsss");
@@ -46,7 +45,6 @@ class SchedulePersistencePortTest extends TestSetUp {
     @Test
     @DisplayName("Schedule 생성")
     public void create() {
-        System.out.println("아 왜");
         ScheduleMapperTest scheduleMapperTest = new ScheduleMapperTest();
         String memberId = memberEntity.getId();
 
@@ -56,4 +54,5 @@ class SchedulePersistencePortTest extends TestSetUp {
         assertEquals(memberId, memberEntity.getId());
         assertEquals(schedule.getId(), result.getId());
     }
+
 }
