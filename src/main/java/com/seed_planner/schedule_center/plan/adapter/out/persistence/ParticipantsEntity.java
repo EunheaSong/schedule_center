@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -21,7 +22,7 @@ class ParticipantsEntity extends BaseEntity {
     @Column
     private String imagePath;
     @ManyToMany
-    private Set<ScheduleEntity> schedule;
+    private Set<ScheduleEntity> schedule = new HashSet<>();
 
     ParticipantsEntity(String name, String imagePath) {
         this.name = name;
