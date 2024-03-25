@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -18,6 +20,8 @@ class ParticipantsEntity extends BaseEntity {
     private String name;
     @Column
     private String imagePath;
+    @ManyToMany
+    private Set<ScheduleEntity> schedule;
 
     ParticipantsEntity(String name, String imagePath) {
         this.name = name;
