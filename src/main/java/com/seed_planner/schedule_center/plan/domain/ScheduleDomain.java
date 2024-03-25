@@ -1,12 +1,10 @@
 package com.seed_planner.schedule_center.plan.domain;
 
-import com.google.gson.Gson;
 import com.seed_planner.schedule_center.member.domain.MemberDomain;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 public class ScheduleDomain extends BaseSchedule {
@@ -14,9 +12,6 @@ public class ScheduleDomain extends BaseSchedule {
     private String[] participantsId;
     private String categoryId;
 
-    public String toStringParticipantsId() {
-        return new Gson().toJson(this.participantsId);
-    }
 
     @Setter
     public static class Builder extends BaseSchedule.Builder<Builder> {

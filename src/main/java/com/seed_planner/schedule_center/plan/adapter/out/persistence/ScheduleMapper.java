@@ -1,12 +1,12 @@
 package com.seed_planner.schedule_center.plan.adapter.out.persistence;
 
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
-import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberMapper;
 import com.seed_planner.schedule_center.plan.domain.Location;
 import com.seed_planner.schedule_center.plan.domain.Memo;
 import com.seed_planner.schedule_center.plan.domain.ScheduleDomain;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 import static com.seed_planner.schedule_center.common.Utils.nullCheck;
 
@@ -14,7 +14,7 @@ import static com.seed_planner.schedule_center.common.Utils.nullCheck;
 @Component
 class ScheduleMapper {
 
-    ScheduleEntity domainToEntity(ScheduleDomain domain, MemberEntity memberEntity) {
+    ScheduleEntity domainToEntity(ScheduleDomain domain, MemberEntity memberEntity, Set<ParticipantsEntity> participantsSet) {
         Location location = nullCheck(domain.getLocation(), new Location(null, null, null));
         Memo meno = nullCheck(domain.getMemo(), new Memo(""));
         return new ScheduleEntity(
@@ -28,8 +28,9 @@ class ScheduleMapper {
                 location.getAddress(),
                 meno.getContents(),
                 domain.getImagePath(),
-                domain.toStringParticipantsId(),
+                participantsSet,
                 domain.getCategoryId()
         );
     }
+
 }
