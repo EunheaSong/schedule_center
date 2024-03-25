@@ -13,7 +13,7 @@ import static com.seed_planner.schedule_center.plan.adapter.out.persistence.QCat
 
 @RequiredArgsConstructor
 @Repository
-public class CategoryQRepositoryImpl implements CategoryQRepository {
+public class CategoryCustomRepositoryImpl implements CategoryCustomRepository {
 
     private final JPAQueryFactory queryFactory;
 

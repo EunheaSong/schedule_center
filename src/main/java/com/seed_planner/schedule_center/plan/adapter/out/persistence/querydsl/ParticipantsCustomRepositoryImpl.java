@@ -18,7 +18,7 @@ import static com.seed_planner.schedule_center.plan.adapter.out.persistence.QPar
 
 @Repository
 @RequiredArgsConstructor
-class ParticipantsQRepositoryImpl implements ParticipantsQRepository {
+class ParticipantsCustomRepositoryImpl implements ParticipantsCustomRepository {
     private final JPAQueryFactory queryFactory;
 
     @Transactional
