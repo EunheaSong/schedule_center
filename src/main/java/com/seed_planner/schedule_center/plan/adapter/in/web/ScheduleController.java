@@ -1,6 +1,8 @@
 package com.seed_planner.schedule_center.plan.adapter.in.web;
 
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.req.ScheduleReq;
+import com.seed_planner.schedule_center.plan.application.port.in.ScheduleUpdateInPort;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,18 +10,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.seed_planner.schedule_center.common.Utils.getMemberId;
+
 @RequiredArgsConstructor
 @RequestMapping("/schedule")
 @RestController
 public class ScheduleController {
-
-
+    private final ScheduleUpdateInPort scheduleUpdateInPort;
 
     //생성
     @PostMapping("")
     public String createSchedule(
-        @RequestBody @Valid ScheduleReq req
+        @RequestBody @Valid ScheduleReq req, HttpServletRequest request
     ){
+        String memberId = getMemberId(request);
+
         return "test";
     }
 

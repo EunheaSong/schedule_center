@@ -2,6 +2,7 @@ package com.seed_planner.schedule_center.plan.adapter.in.web.dto.req;
 
 import com.seed_planner.schedule_center.plan.domain.Location;
 import com.seed_planner.schedule_center.plan.domain.Memo;
+import com.seed_planner.schedule_center.plan.domain.ScheduleDomain;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -27,4 +28,15 @@ public class ScheduleReq {
     private String categoryId;
     private Location location;
     private Memo memo;
+
+    public ScheduleDomain of (Class<ScheduleReq> scheduleReqClass) {
+        return new ScheduleDomain.Builder(this.title, this.startedAt, this.endedAt)
+                .setPlace(this.place)
+                .setImagePath(this.imagePath)
+                .setParticipantsId(this.participantsId)
+                .setCategoryId(this.categoryId)
+                .setLocation(this.location)
+                .setMemo(this.memo)
+                .build();
+    }
 }
