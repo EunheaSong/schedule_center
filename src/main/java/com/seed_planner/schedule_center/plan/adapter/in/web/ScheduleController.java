@@ -5,6 +5,7 @@ import com.seed_planner.schedule_center.plan.application.port.in.ScheduleUpdateI
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +21,10 @@ public class ScheduleController {
 
     //생성
     @PostMapping("")
-    public String createSchedule(
+    public ResponseEntity<String> createSchedule(
         @RequestBody @Valid ScheduleReq req, HttpServletRequest request
     ){
-        String memberId = getMemberId(request);
-
-        return "test";
+        return ResponseEntity.ok(scheduleUpdateInPort.create(req, getMemberId(request)));
     }
 
     //기간 별 조회 - 캘린더 표시에 필요한 정보

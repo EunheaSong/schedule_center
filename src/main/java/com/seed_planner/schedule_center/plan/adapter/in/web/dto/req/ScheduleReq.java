@@ -10,6 +10,7 @@ import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @Getter
@@ -24,12 +25,12 @@ public class ScheduleReq {
     @Length(max = 50)
     private String place;
     private String imagePath;
-    private String[] participantsId;
+    private List<String> participantsId;
     private String categoryId;
     private Location location;
     private Memo memo;
 
-    public ScheduleDomain of (Class<ScheduleReq> scheduleReqClass) {
+    public ScheduleDomain of (Class<ScheduleDomain> scheduleDomainClass) {
         return new ScheduleDomain.Builder(this.title, this.startedAt, this.endedAt)
                 .setPlace(this.place)
                 .setImagePath(this.imagePath)

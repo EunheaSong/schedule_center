@@ -37,12 +37,12 @@ class ScheduleEntity extends BaseEntity {
     @Column
     private String imagePath;
     @JoinTable(
-            name = "schedule_participants",
-            joinColumns = @JoinColumn(name = "schedule_id"),
-            inverseJoinColumns = @JoinColumn(name = "participants_id")
+        name = "schedule_participants",
+        joinColumns = @JoinColumn(name = "schedule_id"),
+        inverseJoinColumns = @JoinColumn(name = "participants_id")
     )
     @ManyToMany
-    private Set<ParticipantsEntity> participantsId = new HashSet<>();;
+    private Set<ParticipantsEntity> participantsId = new HashSet<>();
     @Column
     private String categoryId;
 

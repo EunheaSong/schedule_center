@@ -58,11 +58,11 @@ class ScheduleControllerTest extends TestSetUp {
             MockMvcRequestBuilders.post(url)
                 .content(gson.toJson(req))
                 .contentType(MediaType.APPLICATION_JSON)
-                .header(AUTHORIZATION, token)
+                .header(AUTHORIZATION, token) // TODO : 왜 토큰 에러가 발생하지 않는지 ...?
         );
         result.andExpect(status().isOk());
 
-        assertEquals("test", result.andReturn().getResponse().getContentAsString());
+        assertEquals(15, result.andReturn().getResponse().getContentAsString().length());
     }
 
 }

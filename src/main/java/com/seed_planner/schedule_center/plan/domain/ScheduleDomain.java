@@ -5,18 +5,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 public class ScheduleDomain extends BaseSchedule {
     private MemberDomain member;
-    private String[] participantsId;
+    private List<String> participantsId;
     private String categoryId;
 
 
     @Setter
     public static class Builder extends BaseSchedule.Builder<Builder> {
         private MemberDomain member;
-        private String[] participantsId;
+        private List<String> participantsId;
         private String categoryId;
 
         public Builder(String title, LocalDateTime startedAt, LocalDateTime endedAt) {
@@ -28,7 +29,7 @@ public class ScheduleDomain extends BaseSchedule {
             return self();
         }
 
-        public Builder setParticipantsId(String[] participantsId) {
+        public Builder setParticipantsId(List<String> participantsId) {
             this.participantsId = participantsId;
             return self();
         }

@@ -5,6 +5,7 @@ import com.seed_planner.schedule_center.common.TestConfig;
 import com.seed_planner.schedule_center.common.TestSetUp;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberPersistencePort;
+import com.seed_planner.schedule_center.member.application.port.out.ExternallyMemberPort;
 import com.seed_planner.schedule_center.member.domain.MemberDomain;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.req.ScheduleReq;
 import com.seed_planner.schedule_center.plan.application.port.out.ScheduleUpdateOutPort;
@@ -33,6 +34,8 @@ public class ScheduleServiceTest extends TestSetUp {
     private MemberPersistencePort memberPersistencePort;
     @Mock
     private ScheduleUpdateOutPort scheduleUpdateOutPort;
+    @Mock
+    private ExternallyMemberPort externallyMemberPort;
 
     private static String title = "뽀뇨랑 밥먹기";
     private static LocalDateTime startedAt = LocalDateTime.now();
@@ -49,12 +52,13 @@ public class ScheduleServiceTest extends TestSetUp {
     @Test
     @DisplayName("schedule 생성")
     public void createSchedule() {
-        doReturn(memberDomain).when(memberPersistencePort).getByIdAndIsDeletedFalse(memberEntity.getId());
+//        doReturn(memberDomain).when(memberPersistencePort).getByIdAndIsDeletedFalse(memberEntity.getId());
+        doReturn(memberDomain).when(externallyMemberPort).getActivationMember(memberEntity.getId());
 
         ScheduleReq req = new ScheduleReq(title, startedAt, endedAt, null, null, null, null, null, null);
         memberDomain =  memberPersistencePort.getByIdAndIsDeletedFalse(memberEntity.getId());
-        ScheduleDomain scheduleDomain = dtoToDomain(req, memberDomain);
-
+//        ScheduleDomain scheduleDomain = dtoToDomain(req, memberDomain);
+        ScheduleDomain scheduleDomain = req.of(ScheduleDomain.class);
         try {
             scheduleUpdateOutPort.create(scheduleDomain, memberDomain);
         } catch (Exception e) {
@@ -67,14 +71,15 @@ public class ScheduleServiceTest extends TestSetUp {
     @Test
     @DisplayName("schedule 생성 실패 : member data 없음")
     public void createScheduleFail() {
-        doNothing().when(memberPersistencePort).getByIdAndIsDeletedFalse(memberEntity.getId());
+//        doNothing().when(memberPersistencePort).getByIdAndIsDeletedFalse(memberEntity.getId());
+        doNothing().when(externallyMemberPort).getActivationMember(memberEntity.getId());
 
         ScheduleReq req = new ScheduleReq(title, startedAt, endedAt, null, null, null, null, null, null);
         memberDomain =  memberPersistencePort.getByIdAndIsDeletedFalse(memberEntity.getId());
-        dtoToDomain(req, memberDomain);
+//        dtoToDomain(req, memberDomain);
+        req.of(ScheduleDomain.class);
 
         assertEquals(memberDomain.getEmail(), memberPersistencePort.getByIdAndIsDeletedFalse(memberEntity.getId()).getEmail());
-
     }
 
     public ScheduleDomain dtoToDomain(ScheduleReq req, MemberDomain member) {

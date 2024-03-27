@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Component
@@ -47,5 +48,9 @@ public class ParticipantsPersistencePort implements ParticipantsUpdateOutPort, P
     @Override
     public List<ParticipantsRes> getBasicInfoAllByMemberId(String memberId) {
         return participantsRepository.getBasicInfoByMemberId(memberId);
+    }
+
+    Set<ParticipantsEntity> getAllByIdInInsDeletedFalse(List<String> idList) {
+        return participantsRepository.findAllByIdInAndIsDeletedFalse(idList);
     }
 }
