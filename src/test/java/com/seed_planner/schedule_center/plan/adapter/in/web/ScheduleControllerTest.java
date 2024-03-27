@@ -47,13 +47,14 @@ class ScheduleControllerTest extends TestSetUp {
         );
     }
 
-    private String token = "";
+    private String token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJZCI6IjIyY2EyODdmMjFjMTRmNSIsImlhdCI6MTcxMTU0NDM2OCwiZXhwIjoxNzExNTQ3OTY4fQ.WUkXDn7JTXRk3TfT9-ToEiiY7QyxsBs3u3EUVje5uEc";
 
     @Test
     @DisplayName("create schedule")
     public void createSchedule() throws Exception {
         String url = "/schedule";
         ScheduleReq req = basicScheduleReq("뽀뇨랑 놀이공원", LocalDateTime.now(), LocalDateTime.now());
+
         ResultActions result =  mockMvc.perform(
             MockMvcRequestBuilders.post(url)
                 .content(gson.toJson(req))

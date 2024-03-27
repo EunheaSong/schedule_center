@@ -27,7 +27,7 @@ class SchedulePersistencePort implements ScheduleUpdateOutPort {
         //TODO : select 줄일 수 있도록 refactoring
         MemberEntity member = memberMapper.domainToEntity(memberDomain);
         Set<ParticipantsEntity> participantsSet = new HashSet<>();
-        if (!domain.getParticipantsId().isEmpty()) {
+        if (domain.getParticipantsId() != null && !domain.getParticipantsId().isEmpty()) {
             participantsSet = participantsPersistencePort.getAllByIdInInsDeletedFalse(domain.getParticipantsId());
         }
         return scheduleRepository
