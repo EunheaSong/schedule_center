@@ -7,20 +7,28 @@ import com.seed_planner.schedule_center.plan.domain.ScheduleDomain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static com.seed_planner.schedule_center.common.Utils.nullCheck;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
 class ScheduleMapperTest {
 
     private final Logger logger = LoggerFactory.getLogger(ScheduleMapperTest.class);
 
-    ScheduleEntity domainToEntity(ScheduleDomain domain, MemberEntity memberEntity) {
+    @Mock
+    private ParticipantsPersistencePort participantsPersistencePort;
+
+    ScheduleEntity domainToEntity(ScheduleDomain domain, MemberEntity memberEntity, Set<ParticipantsEntity> participantsSet) {
         Location location = nullCheck(domain.getLocation(), new Location(null, null, null));
         Memo meno = nullCheck(domain.getMemo(), new Memo(""));
         ScheduleEntity s =  new ScheduleEntity(
@@ -34,7 +42,7 @@ class ScheduleMapperTest {
                 location.getAddress(),
                 meno.getContents(),
                 domain.getImagePath(),
-                domain.toStringParticipantsId(),
+                participantsSet,
                 domain.getCategoryId()
         );
         logger.info(s.getId());
@@ -61,7 +69,7 @@ class ScheduleMapperTest {
                     location.getAddress(),
                     meno.getContents(),
                     domain.getImagePath(),
-                    domain.toStringParticipantsId(),
+                    new HashSet<ParticipantsEntity>(),
                     domain.getCategoryId()
             );
         } catch (Exception e) {

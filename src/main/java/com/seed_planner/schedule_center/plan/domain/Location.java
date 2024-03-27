@@ -19,7 +19,7 @@ public class Location {
     }
 
     private void valid(Double lat, Double lng) {
-        if (!(lat != null && lng != null)) throw new IllegalArgumentException("");
+        if ((lat != null) ^ (lng != null)) throw new IllegalArgumentException("Both \"lat\" and \"lng\" must exist or not.");
     }
 
     @Override

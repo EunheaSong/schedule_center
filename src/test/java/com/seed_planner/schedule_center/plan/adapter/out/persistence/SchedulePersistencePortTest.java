@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -48,7 +49,7 @@ class SchedulePersistencePortTest extends TestSetUp {
         ScheduleMapperTest scheduleMapperTest = new ScheduleMapperTest();
         String memberId = memberEntity.getId();
 
-        ScheduleEntity schedule = scheduleMapperTest.domainToEntity(scheduleDomain, memberEntity);
+        ScheduleEntity schedule = scheduleMapperTest.domainToEntity(scheduleDomain, memberEntity, new HashSet<ParticipantsEntity>());
         ScheduleEntity result = scheduleRepository.save(schedule);
 
         assertEquals(memberId, memberEntity.getId());

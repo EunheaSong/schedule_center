@@ -19,7 +19,6 @@ import static com.seed_planner.schedule_center.common.Utils.getMemberId;
 public class ScheduleController {
     private final ScheduleUpdateInPort scheduleUpdateInPort;
 
-    //생성
     @PostMapping("")
     public ResponseEntity<String> createSchedule(
         @RequestBody @Valid ScheduleReq req, HttpServletRequest request
@@ -27,11 +26,4 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleUpdateInPort.create(req, getMemberId(request)));
     }
 
-    //기간 별 조회 - 캘린더 표시에 필요한 정보
-
-    //단건 조회 - 특정 날짜에 대한 정보
-
-    //수정
-
-    //삭제
 }
