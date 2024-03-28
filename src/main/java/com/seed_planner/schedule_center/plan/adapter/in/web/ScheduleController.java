@@ -5,6 +5,7 @@ import com.seed_planner.schedule_center.plan.application.port.in.ScheduleUpdateI
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +24,7 @@ public class ScheduleController {
     public ResponseEntity<String> createSchedule(
         @RequestBody @Valid ScheduleReq req, HttpServletRequest request
     ){
-        return ResponseEntity.ok(scheduleUpdateInPort.create(req, getMemberId(request)));
+        return  ResponseEntity.status(HttpStatus.CREATED).body(scheduleUpdateInPort.create(req, getMemberId(request)));
     }
 
 }
