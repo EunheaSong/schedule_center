@@ -18,7 +18,6 @@ public class ScheduleService implements ScheduleUpdateInPort {
     @Transactional(rollbackOn = Exception.class)
     @Override
     public String create(ScheduleReq req, String memberId) {
-        System.out.println("??????????????????????");
         ScheduleDomain scheduleDomain = req.of(ScheduleDomain.class);
         return scheduleUpdateOutPort.create(scheduleDomain, externallyMemberPort.getActivationMember(memberId));
     }
