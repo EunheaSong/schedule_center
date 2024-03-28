@@ -1,0 +1,82 @@
+###회원가입
+POST http://localhost:8080/member/sign-up
+Content-Type: application/json
+
+{
+  "email": "qqqqq@email.com",
+  "password": "1234@qwer",
+  "rePassword": "1234@qwer"
+}
+
+###로그인
+POST http://localhost:8080/member/sign-in
+Content-Type: application/json
+
+{
+  "email": "aaaa@email.com",
+  "password": "1234@qwer"
+}
+
+> {%
+    client.global.set("token", response.headers.valueOf("AUTHORIZATION"))
+    client.log("토큰 저장이 잘 되었나요? : " + client.global.get("token"))
+%}
+
+###토큰확인
+POST http://localhost:8080/participants
+Authorization: {{token}}
+Content-Type: application/json
+
+> {%
+    client.log("memberId : " + response.body)
+%}
+
+###참여자 등록
+POST http://localhost:8080/participants
+Content-Type: application/json
+Authorization: {{token}}
+
+[
+  {
+    "name": "친구2",
+    "imagPath": null
+  }
+]
+
+<> 2024-03-13T102353.200.json
+
+
+###참가자 수정
+PUT http://localhost:8080/participants
+Content-Type: application/json
+Authorization: {{token}}
+
+[
+  {
+    "id": "62210aced9a641c",
+    "name": "친구아니고 애인",
+    "imagPath": "이메쥐"
+  }
+]
+
+<> 2024-03-13T103005.200.json
+<> 2024-03-13T102424.500.txt
+
+###스케줄 생성
+POST http://localhost:8080/schedule
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "title": "title_e97c7339e54a",
+  "startedAt": "2024-03-23 17:48:06",
+  "endedAt": "2024-03-23 17:48:06",
+  "place": "place_b04a3dd37d58",
+  "imagePath": "imagePath_de12a6865a21",
+  "participantsId": null,
+  "categoryId": null,
+  "location": null,
+  "memo": null
+}
+
+<> 2024-03-23T174849.500.txt

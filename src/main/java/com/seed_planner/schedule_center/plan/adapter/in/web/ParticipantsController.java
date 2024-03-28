@@ -5,6 +5,7 @@ import com.seed_planner.schedule_center.plan.adapter.in.web.dto.req.Participants
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.req.ParticipantsUpdateReq;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ParticipantsRes;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class ParticipantsController {
 
     @PostMapping("")
     public ResponseEntity<List<ParticipantsRes>> createParticipants(
-        @RequestBody List<ParticipantsReq> req,
+        @RequestBody @Valid List<ParticipantsReq> req,
         HttpServletRequest request
     ) {
         return ResponseEntity.ok(participantsUpdateInPort.createParticipants(req, getMemberId(request)));
@@ -29,7 +30,7 @@ public class ParticipantsController {
 
     @PutMapping("")
     public ResponseEntity<List<ParticipantsRes>> updateParticipants(
-        @RequestBody List<ParticipantsUpdateReq> req,
+        @RequestBody @Valid List<ParticipantsUpdateReq> req,
         HttpServletRequest request
     ) {
         return ResponseEntity.ok(participantsUpdateInPort.updateParticipants(req, getMemberId(request)));

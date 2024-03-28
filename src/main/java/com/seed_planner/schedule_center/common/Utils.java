@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Utils {
@@ -21,5 +22,15 @@ public class Utils {
 
     public static String getMemberId(HttpServletRequest request) {
         return request.getAttribute("memberId").toString();
+    }
+
+    //TODO : 함수명 변경...
+    public static <T> T nullCheck(T t, T n) {
+        Optional<T> optionalT = Optional.ofNullable(t);
+        if (optionalT.isPresent()) {
+            return t;
+        } else {
+            return optionalT.orElse(n);
+        }
     }
 }

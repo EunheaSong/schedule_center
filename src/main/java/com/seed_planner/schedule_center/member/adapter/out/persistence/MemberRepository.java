@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-interface MemberRepository extends JpaRepository<MemberEntity, String> {
+public interface MemberRepository extends JpaRepository<MemberEntity, String> {
 
     boolean existsByEmailAndIsDeleted(String email, boolean isDeleted);
 
@@ -14,4 +14,6 @@ interface MemberRepository extends JpaRepository<MemberEntity, String> {
         select m.password from MemberEntity m where m.email = :email
     """)
     String getPasswordByEmail(@Param("email") String email);
+
+    MemberEntity findByIdAndIsDeletedFalse(String id);
 }

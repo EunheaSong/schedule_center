@@ -2,21 +2,24 @@ package com.seed_planner.schedule_center.plan.adapter.out.persistence;
 
 import com.seed_planner.schedule_center.common.model.BaseEntity;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Entity
 class ScheduleEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private MemberEntity member;
     @Column(nullable = false, length = 50)
-    private String name;
+    private String title;
     @Column(nullable = false)
     private LocalDateTime startedAt;
     @Column(nullable = false)
@@ -33,8 +36,14 @@ class ScheduleEntity extends BaseEntity {
     private String memo;
     @Column
     private String imagePath;
-    @Column
-    private String participantsId;
+    @JoinTable(
+        name = "schedule_participants",
+        joinColumns = @JoinColumn(name = "schedule_id"),
+        inverseJoinColumns = @JoinColumn(name = "participants_id")
+    )
+    @ManyToMany
+    private Set<ParticipantsEntity> participantsId = new HashSet<>();
     @Column
     private String categoryId;
+
 }
