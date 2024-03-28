@@ -56,4 +56,10 @@ class SchedulePersistencePortTest extends TestSetUp {
         assertEquals(schedule.getId(), result.getId());
     }
 
+    @Test
+    @DisplayName("Schedule 단 건 조회")
+    public void get() {
+//        scheduleRepository.findById
+    }
+
 }
