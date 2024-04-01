@@ -1,5 +1,9 @@
 package com.seed_planner.schedule_center.member.adapter.out.persistence;
 
+import com.seed_planner.schedule_center.common.exceptionHandler.ExceptionCode;
+import com.seed_planner.schedule_center.common.exceptionHandler.ExceptionResponse;
+import com.seed_planner.schedule_center.common.exceptionHandler.customException.BadRequestException;
+import com.seed_planner.schedule_center.member.application.port.out.ExternallyMemberPort;
 import com.seed_planner.schedule_center.member.application.port.out.MemberInfoPort;
 import com.seed_planner.schedule_center.member.application.port.out.UpdateMemberPort;
 import com.seed_planner.schedule_center.member.domain.MemberDomain;
@@ -9,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Component
-public class MemberPersistencePort implements MemberInfoPort, UpdateMemberPort {
+public class MemberPersistencePort implements MemberInfoPort, UpdateMemberPort, ExternallyMemberPort {
     private final MemberMapper memberMapper;
     private final MemberRepository memberRepository;
 
@@ -20,13 +24,25 @@ public class MemberPersistencePort implements MemberInfoPort, UpdateMemberPort {
 
     @Override
     public MemberDomain getByEmailAndIsDeleted(String email, boolean isDeleted) {
-        return memberMapper.entityToDomain(
-            memberRepository.findByEmailAndIsDeleted(email, isDeleted)
-        );
+        return memberMapper.entityToDomain(memberRepository.findByEmailAndIsDeleted(email, isDeleted));
+    }
+
+    @Override
+    public MemberDomain getByIdAndIsDeletedFalse(String id) {
+        return memberMapper.entityToDomain(memberRepository.findByIdAndIsDeletedFalse(id));
     }
 
     @Override
     public void create(MemberDomain member) {
         memberRepository.save(memberMapper.domainToEntity(member));
+    }
+
+    @Override
+    public MemberDomain getActivationMember(String id) {
+        try {
+            return memberMapper.entityToDomain(memberRepository.findByIdAndIsDeletedFalse(id));
+        } catch (NullPointerException e) {
+            throw new BadRequestException(new ExceptionResponse(ExceptionCode.E10002));
+        }
     }
 }
