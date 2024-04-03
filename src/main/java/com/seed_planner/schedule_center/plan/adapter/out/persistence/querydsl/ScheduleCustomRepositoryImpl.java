@@ -21,8 +21,8 @@ class ScheduleCustomRepositoryImpl implements ScheduleCustomRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public ScheduleItemRes get(String id, String memberId) {
-        ScheduleItemRes res = queryFactory.select(
+    public ScheduleItemRes getScheduleItemRes(String id, String memberId) {
+        return queryFactory.select(
             Projections.constructor(
                 ScheduleItemRes.class,
                 scheduleEntity.id,
@@ -48,31 +48,5 @@ class ScheduleCustomRepositoryImpl implements ScheduleCustomRepository {
                 .and(scheduleEntity.member.eq(memberEntity))
                 .and(scheduleEntity.isDeleted.isFalse()))
         .fetchOne();
-
-        //TODO : Service 로 이동
-        res.setSubScheduleItemLis(findSubScheduleItemListBySchedule());
-        res.setParticipantsIdList(findParticipantsIdListBySchedule());
-
-        return res;
-    }
-
-    //TODO : 각각 객체에 맞는 파일로 메서드 분리
-    private List<String> findParticipantsIdListBySchedule() {
-        return queryFactory.select(participantsEntity.id)
-                .from(participantsEntity)
-                .leftJoin(scheduleEntity).on(participantsEntity.in(scheduleEntity.participantsId))
-                .where(participantsEntity.in(scheduleEntity.participantsId))
-                .fetch();
-    }
-
-    private List<SubScheduleItemRes> findSubScheduleItemListBySchedule() {
-        return queryFactory.select(
-                        Projections.constructor(
-                                SubScheduleItemRes.class,
-                                subScheduleEntity.id
-                        )
-                ).from(subScheduleEntity)
-                .innerJoin(scheduleEntity).on(scheduleEntity.eq(subScheduleEntity.schedule))
-                .fetch();
     }
 }

@@ -4,6 +4,7 @@ import com.seed_planner.schedule_center.common.TestConfig;
 import com.seed_planner.schedule_center.common.TestSetUp;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
 import com.seed_planner.schedule_center.member.domain.MemberDomain;
+import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ScheduleItemRes;
 import com.seed_planner.schedule_center.plan.domain.ScheduleDomain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,10 +31,10 @@ class SchedulePersistencePortTest extends TestSetUp {
     public void setupMemberData() {
         memberDomain = new MemberDomain("email@aaaa.com", "passsss");
         memberEntity = new MemberEntity("email@aaaa.com", "passsss", "");
-        scheduleDomain = createSchedule();
+        scheduleDomain = createScheduleDomain();
     }
 
-    public static ScheduleDomain createSchedule() {
+    public static ScheduleDomain createScheduleDomain() {
         String title = "뽀뇨랑 데이트";
         LocalDateTime startedAt = LocalDateTime.now();
         LocalDateTime endedAt = LocalDateTime.now();
@@ -45,7 +46,7 @@ class SchedulePersistencePortTest extends TestSetUp {
 
     @Test
     @DisplayName("Schedule 생성")
-    public void create() {
+    public void createTest() {
         ScheduleMapperTest scheduleMapperTest = new ScheduleMapperTest();
         String memberId = memberEntity.getId();
 
@@ -56,10 +57,21 @@ class SchedulePersistencePortTest extends TestSetUp {
         assertEquals(schedule.getId(), result.getId());
     }
 
+    private ScheduleEntity createSchedule() {
+        ScheduleMapperTest scheduleMapperTest = new ScheduleMapperTest();
+
+        ScheduleEntity schedule = scheduleMapperTest.domainToEntity(scheduleDomain, memberEntity, new HashSet<ParticipantsEntity>());
+        return scheduleRepository.save(schedule);
+    }
+
     @Test
     @DisplayName("Schedule 단 건 조회")
-    public void get() {
-//        scheduleRepository.findById
+    public void getScheduleItemRes() {
+        ScheduleEntity scheduleEntity = createSchedule();
+        ScheduleItemRes res = scheduleRepository.getScheduleItemRes(scheduleEntity.getId(), memberEntity.getId());
+
+        assertEquals(scheduleEntity.getTitle(), res.getTitle());
+        assertEquals(scheduleEntity.getCreatedAt(), res.getCreatedAt());
     }
 
 }
