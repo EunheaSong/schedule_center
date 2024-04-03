@@ -27,4 +27,13 @@ public abstract class BaseEntity {
 
     @Column(nullable = false)
     private boolean isDeleted = false;
+
+    public BaseEntity(){}
+
+    protected BaseEntity(String id, LocalDateTime createdAt, LocalDateTime modifiedAt, boolean isDeleted) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
+        this.isDeleted = isDeleted;
+    }
 }

@@ -46,18 +46,14 @@ public class ScheduleServiceTest extends TestSetUp {
     @BeforeEach
     void setUp() {
         memberDomain = new MemberDomain("email@aaaa.com", "passsss");
-        memberEntity = new MemberEntity("email@aaaa.com", "passsss", "");
+        memberEntity = MemberEntity.createMember("email@aaaa.com", "passsss", "");
     }
 
     @Test
     @DisplayName("schedule 생성")
     public void createSchedule() {
-//        doReturn(memberDomain).when(memberPersistencePort).getByIdAndIsDeletedFalse(memberEntity.getId());
-        doReturn(memberDomain).when(externallyMemberPort).getActivationMember(memberEntity.getId());
-
         ScheduleReq req = new ScheduleReq(title, startedAt, endedAt, null, null, null, null, null, null);
         memberDomain =  memberPersistencePort.getByIdAndIsDeletedFalse(memberEntity.getId());
-//        ScheduleDomain scheduleDomain = dtoToDomain(req, memberDomain);
         ScheduleDomain scheduleDomain = req.of(ScheduleDomain.class);
         try {
             scheduleUpdateOutPort.create(scheduleDomain, memberDomain);

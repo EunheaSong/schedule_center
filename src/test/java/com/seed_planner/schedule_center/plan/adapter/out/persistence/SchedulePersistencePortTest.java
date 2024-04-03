@@ -29,7 +29,7 @@ class SchedulePersistencePortTest extends TestSetUp {
     @BeforeEach
     public void setupMemberData() {
         memberDomain = new MemberDomain("email@aaaa.com", "passsss");
-        memberEntity = new MemberEntity("email@aaaa.com", "passsss", "");
+        memberEntity = MemberEntity.createMember("email@aaaa.com", "passsss", "");
         scheduleDomain = createSchedule();
     }
 
