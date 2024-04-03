@@ -14,6 +14,7 @@ import java.util.List;
 
 import static com.seed_planner.schedule_center.member.adapter.out.persistence.QMemberEntity.memberEntity;
 import static com.seed_planner.schedule_center.plan.adapter.out.persistence.QParticipantsEntity.participantsEntity;
+import static com.seed_planner.schedule_center.plan.adapter.out.persistence.QScheduleEntity.scheduleEntity;
 
 
 @Repository
@@ -60,6 +61,15 @@ class ParticipantsCustomRepositoryImpl implements ParticipantsCustomRepository {
                 )
             )
             .execute();
+    }
+
+    @Override
+    public List<String> findParticipantsIdListBySchedule(String scheduleId) {
+        return queryFactory.select(participantsEntity.id)
+            .from(participantsEntity)
+            .leftJoin(scheduleEntity).on(scheduleEntity.id.eq(scheduleId))
+            .where(participantsEntity.in(scheduleEntity.participantsId))
+            .fetch();
     }
 
 }

@@ -9,4 +9,6 @@ public interface ParticipantsCustomRepository {
     void update(ParticipantsDomain domain);
     List<ParticipantsRes> getBasicInfoByMemberId(String memberId);
     void isDeletedUpdate(String[] idList, boolean state, String memberId);
+
+    List<String> findParticipantsIdListBySchedule(String scheduleId);
 }
