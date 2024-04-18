@@ -3,6 +3,7 @@ package com.seed_planner.schedule_center.plan.adapter.out.persistence;
 import com.seed_planner.schedule_center.common.TestConfig;
 import com.seed_planner.schedule_center.common.TestSetUp;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
+import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberRepository;
 import com.seed_planner.schedule_center.member.domain.MemberDomain;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ScheduleItemRes;
 import com.seed_planner.schedule_center.plan.domain.ScheduleDomain;
@@ -23,6 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SchedulePersistencePortTest extends TestSetUp {
     @Autowired
     private ScheduleRepository scheduleRepository;
+    @Autowired
+    private MemberRepository memberRepository;
     private static ScheduleDomain scheduleDomain;
     public static MemberDomain memberDomain;
     public static MemberEntity memberEntity;
@@ -32,6 +35,7 @@ class SchedulePersistencePortTest extends TestSetUp {
         memberDomain = new MemberDomain("email@aaaa.com", "passsss");
         memberEntity = new MemberEntity("email@aaaa.com", "passsss", "");
         scheduleDomain = createScheduleDomain();
+        memberRepository.save(memberEntity);
     }
 
     public static ScheduleDomain createScheduleDomain() {
