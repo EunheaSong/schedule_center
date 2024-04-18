@@ -64,7 +64,7 @@ class ParticipantsCustomRepositoryImpl implements ParticipantsCustomRepository {
     }
 
     @Override
-    public List<String> findParticipantsIdListBySchedule(String scheduleId) {
+    public List<String> findParticipantsIdListByScheduleId(String scheduleId) {
         return queryFactory.select(participantsEntity.id)
             .from(participantsEntity)
             .leftJoin(scheduleEntity).on(scheduleEntity.id.eq(scheduleId))
