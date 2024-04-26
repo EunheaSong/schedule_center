@@ -10,5 +10,6 @@ public interface ParticipantsCustomRepository {
     List<ParticipantsRes> getBasicInfoByMemberId(String memberId);
     void isDeletedUpdate(String[] idList, boolean state, String memberId);
 
-    List<String> findParticipantsIdListBySchedule(String scheduleId);
+    List<String> findParticipantsIdListByScheduleId(String scheduleId);
+
 }

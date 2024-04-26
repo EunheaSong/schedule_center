@@ -39,10 +39,9 @@ public class MemberPersistencePort implements MemberInfoPort, UpdateMemberPort, 
 
     @Override
     public MemberDomain getActivationMember(String id) {
-        try {
-            return memberMapper.entityToInstanceOfDomain(memberRepository.findByIdAndIsDeletedFalse(id));
-        } catch (NullPointerException e) {
-            throw new BadRequestException(new ExceptionResponse(ExceptionCode.E10002));
-        }
+        MemberEntity member = memberRepository.findByIdAndIsDeletedFalse(id);
+        if (member == null) throw new BadRequestException(new ExceptionResponse(ExceptionCode.E10002));
+        return memberMapper.entityToDomain(member);
     }
+
 }

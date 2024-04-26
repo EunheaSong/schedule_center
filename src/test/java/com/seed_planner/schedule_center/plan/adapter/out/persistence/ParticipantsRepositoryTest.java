@@ -74,7 +74,7 @@ class ParticipantsRepositoryTest extends TestSetUp {
     @DisplayName("schedule에 맞는 participants 찾기")
     public void findBySchedule() {
         String scheduleId = schedule.getId();
-        List<String> idList = findParticipantsIdListBySchedule(scheduleId);
+        List<String> idList = findParticipantsIdListByScheduleId(scheduleId);
 
         assertFalse(idList.isEmpty());
         assertEquals(1, idList.size());
@@ -85,13 +85,13 @@ class ParticipantsRepositoryTest extends TestSetUp {
     @DisplayName("schedule에 맞는 participants 찾기 - 조회 결과 없음")
     public void findByScheduleResultIsNull() {
         ScheduleEntity schedule2 = saveSchedule(Set.of(participants));
-        List<String> idList = findParticipantsIdListBySchedule(schedule2.getId());
+        List<String> idList = findParticipantsIdListByScheduleId(schedule2.getId());
 
         assertTrue(idList.isEmpty());
 
     }
 
-    private List<String> findParticipantsIdListBySchedule(String scheduleId) {
+    private List<String> findParticipantsIdListByScheduleId(String scheduleId) {
         return queryFactory.select(participantsEntity.id)
             .from(participantsEntity)
             .leftJoin(scheduleEntity).on(scheduleEntity.id.eq(scheduleId))

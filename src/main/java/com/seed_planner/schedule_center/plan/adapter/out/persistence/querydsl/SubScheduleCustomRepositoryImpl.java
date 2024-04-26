@@ -3,6 +3,7 @@ package com.seed_planner.schedule_center.plan.adapter.out.persistence.querydsl;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.SubScheduleItemRes;
+import com.seed_planner.schedule_center.plan.domain.Location;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,19 @@ public class SubScheduleCustomRepositoryImpl implements SubScheduleCustomReposit
         return jpaQueryFactory.select(
                 Projections.constructor(
                     SubScheduleItemRes.class,
-                    subScheduleEntity.id
+                    subScheduleEntity.id,
+                    subScheduleEntity.title,
+                    subScheduleEntity.startedAt,
+                    subScheduleEntity.endedAt,
+                    subScheduleEntity.place,
+                    subScheduleEntity.memo,
+                    subScheduleEntity.imagePath,
+                    Projections.constructor(
+                        Location.class,
+                        subScheduleEntity.lat,
+                        subScheduleEntity.lng,
+                        subScheduleEntity.address
+                    )
                 )
             ).from(subScheduleEntity)
             .innerJoin(scheduleEntity).on(scheduleEntity.id.eq(scheduleId))

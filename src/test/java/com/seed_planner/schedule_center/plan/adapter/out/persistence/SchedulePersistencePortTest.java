@@ -3,7 +3,9 @@ package com.seed_planner.schedule_center.plan.adapter.out.persistence;
 import com.seed_planner.schedule_center.common.TestConfig;
 import com.seed_planner.schedule_center.common.TestSetUp;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
+import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberRepository;
 import com.seed_planner.schedule_center.member.domain.MemberDomain;
+import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ScheduleItem;
 import com.seed_planner.schedule_center.plan.domain.ScheduleDomain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,6 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SchedulePersistencePortTest extends TestSetUp {
     @Autowired
     private ScheduleRepository scheduleRepository;
+    @Autowired
+    private MemberRepository memberRepository;
     private static ScheduleDomain scheduleDomain;
     public static MemberDomain memberDomain;
     public static MemberEntity memberEntity;
@@ -29,11 +33,12 @@ class SchedulePersistencePortTest extends TestSetUp {
     @BeforeEach
     public void setupMemberData() {
         memberDomain = new MemberDomain("email@aaaa.com", "passsss");
-        memberEntity = MemberEntity.createMember("email@aaaa.com", "passsss", "");
-        scheduleDomain = createSchedule();
+        memberEntity = new MemberEntity("email@aaaa.com", "passsss", "");
+        scheduleDomain = createScheduleDomain();
+        memberRepository.save(memberEntity);
     }
 
-    public static ScheduleDomain createSchedule() {
+    public static ScheduleDomain createScheduleDomain() {
         String title = "뽀뇨랑 데이트";
         LocalDateTime startedAt = LocalDateTime.now();
         LocalDateTime endedAt = LocalDateTime.now();
@@ -45,7 +50,7 @@ class SchedulePersistencePortTest extends TestSetUp {
 
     @Test
     @DisplayName("Schedule 생성")
-    public void create() {
+    public void createTest() {
         ScheduleMapperTest scheduleMapperTest = new ScheduleMapperTest();
         String memberId = memberEntity.getId();
 
@@ -54,6 +59,23 @@ class SchedulePersistencePortTest extends TestSetUp {
 
         assertEquals(memberId, memberEntity.getId());
         assertEquals(schedule.getId(), result.getId());
+    }
+
+    private ScheduleEntity createSchedule() {
+        ScheduleMapperTest scheduleMapperTest = new ScheduleMapperTest();
+
+        ScheduleEntity schedule = scheduleMapperTest.domainToEntity(scheduleDomain, memberEntity, new HashSet<ParticipantsEntity>());
+        return scheduleRepository.save(schedule);
+    }
+
+    @Test
+    @DisplayName("Schedule 단 건 조회")
+    public void getScheduleItemRes() {
+        ScheduleEntity scheduleEntity = createSchedule();
+        ScheduleItem res = scheduleRepository.getScheduleItemRes(scheduleEntity.getId(), memberEntity.getId());
+
+        assertEquals(scheduleEntity.getTitle(), res.getTitle());
+        assertEquals(scheduleEntity.getCreatedAt(), res.getCreatedAt());
     }
 
 }

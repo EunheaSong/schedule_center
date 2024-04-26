@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface ParticipantsInfoPort {
     List<ParticipantsRes> getBasicInfoAllByMemberId(String memberId);
+    List<String> getParticipantsIdListByScheduleId(String scheduleId);
 
 }

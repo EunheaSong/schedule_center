@@ -52,8 +52,8 @@ class ScheduleMapperTest {
     @Test
     @DisplayName("domain to entity 성공 테스트")
     public void domainToEntityTest() {
-        ScheduleDomain domain = SchedulePersistencePortTest.createSchedule();
-        MemberEntity memberEntity = MemberEntity.createMember("email@aaaa.com", "passsss", "");
+        ScheduleDomain domain = SchedulePersistencePortTest.createScheduleDomain();
+        MemberEntity memberEntity = new MemberEntity("email@aaaa.com", "passsss", "");
         ScheduleEntity entity = null;
         try {
             Location location = nullCheck(domain.getLocation(), new Location(null, null, null));

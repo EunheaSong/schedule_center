@@ -54,7 +54,7 @@ public class ParticipantsPersistencePort implements ParticipantsUpdateOutPort, P
         return participantsRepository.getBasicInfoByMemberId(memberId);
     }
 
-    Set<ParticipantsEntity> getAllByIdInIsDeletedFalse(List<String> idList) {
+    public Set<ParticipantsEntity> getAllByIdInInsDeletedFalse(List<String> idList) {
         Set<ParticipantsEntity> participantsEntitySet = participantsRepository.findAllByIdInAndIsDeletedFalse(idList);
         if(idList.size() != participantsEntitySet.size()) {
             logger.error("Participants select error.\nDon't select ids : "
@@ -64,5 +64,10 @@ public class ParticipantsPersistencePort implements ParticipantsUpdateOutPort, P
                     .collect(Collectors.joining(", ")));
         }
         return participantsEntitySet;
+    }
+
+    @Override
+    public List<String> getParticipantsIdListByScheduleId(String scheduleId) {
+        return participantsRepository.findParticipantsIdListByScheduleId(scheduleId);
     }
 }
