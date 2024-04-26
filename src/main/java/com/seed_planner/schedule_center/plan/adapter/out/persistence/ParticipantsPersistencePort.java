@@ -54,7 +54,7 @@ public class ParticipantsPersistencePort implements ParticipantsUpdateOutPort, P
         return participantsRepository.getBasicInfoByMemberId(memberId);
     }
 
-    public Set<ParticipantsEntity> getAllByIdInInsDeletedFalse(List<String> idList) {
+    public Set<ParticipantsEntity> getAllByIdInIsDeletedFalse(List<String> idList) {
         Set<ParticipantsEntity> participantsEntitySet = participantsRepository.findAllByIdInAndIsDeletedFalse(idList);
         if(idList.size() != participantsEntitySet.size()) {
             logger.error("Participants select error.\nDon't select ids : "

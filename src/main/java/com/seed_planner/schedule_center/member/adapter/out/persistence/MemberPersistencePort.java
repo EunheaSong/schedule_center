@@ -41,7 +41,7 @@ public class MemberPersistencePort implements MemberInfoPort, UpdateMemberPort, 
     public MemberDomain getActivationMember(String id) {
         MemberEntity member = memberRepository.findByIdAndIsDeletedFalse(id);
         if (member == null) throw new BadRequestException(new ExceptionResponse(ExceptionCode.E10002));
-        return memberMapper.entityToDomain(member);
+        return memberMapper.entityToInstanceOfDomain(member);
     }
 
 }
