@@ -11,4 +11,5 @@ public interface ParticipantsCustomRepository {
     void isDeletedUpdate(String[] idList, boolean state, String memberId);
 
     List<String> findParticipantsIdListByScheduleId(String scheduleId);
+
 }

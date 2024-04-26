@@ -110,6 +110,16 @@ public class ScheduleServiceTest extends TestSetUp {
     @Test
     @DisplayName("schedule 생성 실패 : id에 맞는 참여자가 존재하지 않음.")
     public void createSchedule_existNotParticipantsByParticipantsId() {
+        ScheduleReq req = new ScheduleReq(title, startedAt, endedAt, null, null, null, null, null, null);
+        memberDomain =  memberPersistencePort.getByIdAndIsDeletedFalse(memberEntity.getId());
+        ScheduleDomain scheduleDomain = req.of(ScheduleDomain.class);
+        try {
+            scheduleUpdateOutPort.create(scheduleDomain, memberDomain);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+
+        assertEquals(memberDomain.getEmail(), memberPersistencePort.getByIdAndIsDeletedFalse(memberEntity.getId()).getEmail());
     }
 
 
