@@ -20,7 +20,7 @@ public class MemberEntity extends BaseEntity {
     @Column
     private String kakaoId;
 
-    private MemberEntity(String email, String password, String kakaoId) {
+    public MemberEntity(String email, String password, String kakaoId) {
         super();
         this.email = email;
         this.password = password;
