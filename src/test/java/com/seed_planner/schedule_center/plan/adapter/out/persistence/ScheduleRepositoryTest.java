@@ -6,8 +6,7 @@ import com.seed_planner.schedule_center.common.TestConfig;
 import com.seed_planner.schedule_center.common.TestSetUp;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberRepository;
-import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ScheduleItemRes;
-import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.SubScheduleItemRes;
+import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ScheduleItem;
 import com.seed_planner.schedule_center.plan.domain.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,12 +15,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static com.seed_planner.schedule_center.member.adapter.out.persistence.QMemberEntity.memberEntity;
-import static com.seed_planner.schedule_center.plan.adapter.out.persistence.QParticipantsEntity.participantsEntity;
 import static com.seed_planner.schedule_center.plan.adapter.out.persistence.QScheduleEntity.scheduleEntity;
-import static com.seed_planner.schedule_center.plan.adapter.out.persistence.QSubScheduleEntity.subScheduleEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Import(TestConfig.class)
@@ -63,9 +59,9 @@ class ScheduleRepositoryTest extends TestSetUp {
     public void getScheduleItemRes() {
         String id = schedule.getId();
         String memberId = member.getId();
-        ScheduleItemRes res = queryFactory.select(
+        ScheduleItem res = queryFactory.select(
                 Projections.constructor(
-                    ScheduleItemRes.class,
+                    ScheduleItem.class,
                     scheduleEntity.id,
                     scheduleEntity.title,
                     scheduleEntity.createdAt,
@@ -97,8 +93,4 @@ class ScheduleRepositoryTest extends TestSetUp {
 
     }
 
-    @Test
-    public void get() {
-        scheduleRepository.getScheduleItemRes(schedule.getId(), member.getId());
-    }
 }

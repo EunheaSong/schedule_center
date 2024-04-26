@@ -66,6 +66,7 @@ public class ParticipantsPersistencePort implements ParticipantsUpdateOutPort, P
         return participantsEntitySet;
     }
 
+    @Override
     public List<String> getParticipantsIdListByScheduleId(String scheduleId) {
         return participantsRepository.findParticipantsIdListByScheduleId(scheduleId);
     }

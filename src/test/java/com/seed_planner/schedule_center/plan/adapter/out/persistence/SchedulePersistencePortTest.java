@@ -5,7 +5,7 @@ import com.seed_planner.schedule_center.common.TestSetUp;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberEntity;
 import com.seed_planner.schedule_center.member.adapter.out.persistence.MemberRepository;
 import com.seed_planner.schedule_center.member.domain.MemberDomain;
-import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ScheduleItemRes;
+import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ScheduleItem;
 import com.seed_planner.schedule_center.plan.domain.ScheduleDomain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -72,7 +72,7 @@ class SchedulePersistencePortTest extends TestSetUp {
     @DisplayName("Schedule 단 건 조회")
     public void getScheduleItemRes() {
         ScheduleEntity scheduleEntity = createSchedule();
-        ScheduleItemRes res = scheduleRepository.getScheduleItemRes(scheduleEntity.getId(), memberEntity.getId());
+        ScheduleItem res = scheduleRepository.getScheduleItemRes(scheduleEntity.getId(), memberEntity.getId());
 
         assertEquals(scheduleEntity.getTitle(), res.getTitle());
         assertEquals(scheduleEntity.getCreatedAt(), res.getCreatedAt());
