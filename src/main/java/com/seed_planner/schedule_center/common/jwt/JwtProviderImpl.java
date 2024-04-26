@@ -36,6 +36,7 @@ public class JwtProviderImpl implements JwtProvider {
     }
 
     public String isValidToken(String token) {
+        System.out.println(token);
         if (token.isEmpty() || token.isBlank()) throw new IllegalArgumentException("Token is empty or blank.");
         String[] tokens = token.split(" ");
         if (!tokens[0].equals(BEARER)) throw new IllegalArgumentException("This is malformed token.");
