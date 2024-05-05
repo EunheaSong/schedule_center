@@ -11,7 +11,6 @@ import com.seed_planner.schedule_center.member.application.port.out.UpdateMember
 import com.seed_planner.schedule_center.member.domain.MemberDomain;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

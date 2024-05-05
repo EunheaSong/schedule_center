@@ -1,5 +1,6 @@
 package com.seed_planner.schedule_center.member.adapter.out.persistence;
 
+import com.seed_planner.schedule_center.common.model.BaseDomain;
 import com.seed_planner.schedule_center.common.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,5 +25,20 @@ public class MemberEntity extends BaseEntity {
         this.email = email;
         this.password = password;
         this.kakaoId = kakaoId;
+    }
+
+    private MemberEntity(String email, String password, String kakaoId, BaseDomain baseDomain) {
+        super(baseDomain.getId(), baseDomain.getCreatedAt(), baseDomain.getModifiedAt(), baseDomain.isDeleted());
+        this.email = email;
+        this.password = password;
+        this.kakaoId = kakaoId;
+    }
+
+    public static MemberEntity createMember(String email, String password, String kakaoId) {
+        return new MemberEntity(email, password, kakaoId);
+    }
+
+    public static MemberEntity toMemberEntity(String email, String password, String kakaoId, BaseDomain baseDomain) {
+        return new MemberEntity(email, password, kakaoId, baseDomain);
     }
 }

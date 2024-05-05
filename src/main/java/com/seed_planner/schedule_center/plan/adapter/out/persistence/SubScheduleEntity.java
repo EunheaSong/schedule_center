@@ -5,17 +5,21 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Entity
-public class SubScheduleEntity extends BaseEntity {
+class SubScheduleEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private ScheduleEntity schedule;
     @Column(nullable = false, length = 50)
-    private String name;
+    private String title;
     @Column(nullable = false)
     private LocalDateTime startedAt;
     @Column(nullable = false)

@@ -10,15 +10,25 @@ import org.springframework.stereotype.Component;
 public class MemberMapper {
     private final BaseMapper baseMapper;
 
-    public MemberEntity domainToEntity(MemberDomain domain) {
-        return new MemberEntity(
+    //TODO : 더 괜찮은 메서드명...
+    public MemberEntity domainToInstanceOfEntity(MemberDomain domain) {
+        return MemberEntity.createMember(
             domain.getEmail(),
             domain.getPassword(),
             domain.getKakaoId()
         );
     }
 
-    public MemberDomain entityToDomain(MemberEntity entity) {
+    public MemberEntity domainToEntity(MemberDomain domain) {
+        return MemberEntity.toMemberEntity(
+                domain.getEmail(),
+                domain.getPassword(),
+                domain.getKakaoId(),
+                domain.getBaseDomain()
+        );
+    }
+
+    public MemberDomain entityToInstanceOfDomain(MemberEntity entity) {
         return new MemberDomain(
             entity.getEmail(),
             entity.getPassword(),

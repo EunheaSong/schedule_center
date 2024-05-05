@@ -5,14 +5,19 @@ import com.seed_planner.schedule_center.plan.application.port.out.ParticipantsUp
 import com.seed_planner.schedule_center.plan.domain.ParticipantsDomain;
 import com.seed_planner.schedule_center.plan.adapter.in.web.dto.res.ParticipantsRes;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
 public class ParticipantsPersistencePort implements ParticipantsUpdateOutPort, ParticipantsInfoPort {
+    private final Logger logger = LoggerFactory.getLogger(ParticipantsPersistencePort.class);
     private final ParticipantsRepository participantsRepository;
     private final ParticipantsMapper participantsMapper;
     private final BatchRepository batchRepository;
@@ -47,5 +52,22 @@ public class ParticipantsPersistencePort implements ParticipantsUpdateOutPort, P
     @Override
     public List<ParticipantsRes> getBasicInfoAllByMemberId(String memberId) {
         return participantsRepository.getBasicInfoByMemberId(memberId);
+    }
+
+    public Set<ParticipantsEntity> getAllByIdInIsDeletedFalse(List<String> idList) {
+        Set<ParticipantsEntity> participantsEntitySet = participantsRepository.findAllByIdInAndIsDeletedFalse(idList);
+        if(idList.size() != participantsEntitySet.size()) {
+            logger.error("Participants select error.\nDon't select ids : "
+                    + participantsEntitySet.stream()
+                    .filter(p -> !idList.contains(p.getId()))
+                    .map(Object::toString)
+                    .collect(Collectors.joining(", ")));
+        }
+        return participantsEntitySet;
+    }
+
+    @Override
+    public List<String> getParticipantsIdListByScheduleId(String scheduleId) {
+        return participantsRepository.findParticipantsIdListByScheduleId(scheduleId);
     }
 }
